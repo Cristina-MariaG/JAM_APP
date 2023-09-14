@@ -1,0 +1,81 @@
+version: "3.9"
+
+x-logging:
+  &default-logging
+    options:
+      max-size: "10m"
+      max-file: "10"
+
+services:
+  ### FRONT ###
+  jam-front:
+    build:
+      context: ${HOST_DIR_FRONT}
+    image: jam-front
+    restart: unless-stopped    
+    ports:
+      - '8080:8080'
+    container_name: jam-front
+    volumes:
+      - ./${HOST_DIR_FRONT}/:/front/
+    env_file: .env
+    tty: true
+    networks:
+      jam_network:
+    entrypoint: /front/entrypoint_front.sh
+
+  ### BACKEND ###
+  jam-back:
+    build: ${HOST_DIR_BACK}
+    ports:
+      - "8213:8212"
+    image: "jam-back"
+    container_name: jam-back
+    restart: unless-stopped
+    volumes:
+      - ./${HOST_DIR_BACK}/:/back/
+    networks:
+      jam_network:
+        aliases:
+          - ${BACK_HOST}
+    env_file: .env
+    environment:
+      DJANGO_ENV: ${DJANGO_ENV}
+      BACK_PORT: ${BACK_PORT}
+      BACK_DJANGO_SUPER_USER_LOGIN: ${DJANGO_SUPER_USER_LOGIN}
+      BACK_DJANGO_SUPER_USER_EMAIL: ${DJANGO_SUPER_USER_EMAIL}
+      BACK_DJANGO_SUPER_USER_PWD: ${DJANGO_SUPER_USER_PWD}
+    command: "/back/entrypoint_back.sh"
+    depends_on:
+       - jam_sqldb
+
+  ### DATABASE ###
+  jam_sqldb:
+    container_name: jam_sql
+    image: mysql
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_MOTEUR_NAME}
+      MYSQL_USER: ${DB_MOTEUR_USER}
+      MYSQL_PASSWORD: ${DB_MOTEUR_PASSWORD}
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - jam_sqldb:/var/lib/mysql
+    ports:
+      - "3506:3306"
+    networks:
+      jam_network:
+        aliases:
+          - ${DB_MOTEUR_HOST}
+
+
+volumes:
+  jam_sqldb:
+    external: true
+
+
+networks:
+  jam_network:
+    external: true

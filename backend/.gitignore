@@ -1,0 +1,6 @@
+/.vscode
+*.pyc
+migrations
+__pycache__
+
+/log
