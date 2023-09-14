@@ -12,6 +12,7 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
+.env
 # System Files
 .DS_Store
 Thumbs.db
