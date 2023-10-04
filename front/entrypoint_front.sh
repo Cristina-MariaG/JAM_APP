@@ -20,7 +20,7 @@ else
   npm install
   npm run dev 
   tail -f /dev/null
-  # --add-host jam-moteur:51.15.222.143
+  
   # CMD ["nodemon", "--exec", "npm", "run", "docker-start"]
 fi
 

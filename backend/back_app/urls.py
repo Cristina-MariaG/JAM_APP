@@ -1,9 +1,9 @@
 from django.urls import path
 
 from back_app.views import views
+from back_app.views import user
 
 urlpatterns = [
-    # path("", views.index, name="index"),
-     path("", views.Collection.as_view()),
+    path("", views.Collection.as_view()),
+    path("user/", user.UserCollection.as_view()),
 ]
-

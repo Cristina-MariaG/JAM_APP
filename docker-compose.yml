@@ -14,7 +14,7 @@ services:
     image: jam-front
     restart: unless-stopped    
     ports:
-      - '8080:8080'
+      - '8000:8000'
     container_name: jam-front
     volumes:
       - ./${HOST_DIR_FRONT}/:/front/

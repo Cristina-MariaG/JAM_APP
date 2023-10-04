@@ -21,5 +21,5 @@ You can then launch the stack simply with `docker-compose up`.
 
 The following urls will be available:
 
-- front : http://localhost:8080/
-- back :http://localhost:8213/
+- front : http://localhost:8000/
+- back : http://localhost:8213/
