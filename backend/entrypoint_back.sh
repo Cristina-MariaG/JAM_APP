@@ -6,13 +6,13 @@ migrateData=0
 #Commande pour générer le modele à partir d'une BDD existante
 #  on se position ou il ya manage.py
 
-# python3.7 manage.py inspectdb > back_app/models.py
+# python3.7 /back/manage.py inspectdb > back_app/models.py
 
 # python3.7 /back/manage.py migrate
 
 # python3.7 /back/manage.py makemigrations
 
-python3.7 /back/manage.py migrate --run-syncdb
+ python3.7 /back/manage.py migrate --run-syncdb
 
 #if [ "${DJANGO_ENV}" = "local" ]; then
 #

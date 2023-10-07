@@ -16,10 +16,7 @@ from rest_framework.views import APIView
 from django.conf import settings
 
 
-logger = logging.getLogger("eco_db")
-
-# URL_NOT_REQUIRING_AUTH = settings.URL_NOT_REQUIRING_AUTH
-
+logger = logging.getLogger("jam")
 
 class HandleError(APIView):
     # @staticmethod
@@ -68,18 +65,14 @@ class HandleError(APIView):
 
                 except ValidationError as e:
                     recuperateUserIdAndLogError(args)
-
-                    response = responseByErrorSerializerType(e)
+                    
                     statusCode = status.HTTP_400_BAD_REQUEST
-                    if response["code"][0] == "CODE5":
-                        statusCode = status.HTTP_403_FORBIDDEN
-                    if response["code"][0] == "CODE6":
-                        statusCode = status.HTTP_404_NOT_FOUND
+
 
                     logger.error(
-                        f"{text}: Except ValidationError : {str(e)}. {response}"
+                        f"{text}: Except ValidationError : {str(e)}. {statusCode}"
                     )
-                    return Response(response, status=statusCode)
+                    return Response(status=statusCode)
 
                 except DatabaseError as e:
                     recuperateUserIdAndLogError(args)
@@ -90,14 +83,6 @@ class HandleError(APIView):
                         status.HTTP_500_INTERNAL_SERVER_ERROR,
                     )
 
-                except ArangoError as e:
-                    recuperateUserIdAndLogError(args)
-
-                    logger.error(f"{text}: Except ArangoError : {str(e)}")
-                    return Response(
-                        {"status": "Internal server error"},
-                        status.HTTP_500_INTERNAL_SERVER_ERROR,
-                    )
 
                 except Exception as e:
                     recuperateUserIdAndLogError(args)
@@ -121,7 +106,6 @@ def recuperateUserIdAndLogError(args):
             user_value = request.session.get("user", None)
             if user_value:
                 id_user = request.session["user"]["id"]
-    #   if not request.path.startswith(URL_NOT_REQUIRING_AUTH):
 
     if id_user:
         logger.error(f"Except Exception user with id: {str(id_user)}")

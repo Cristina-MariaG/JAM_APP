@@ -27,11 +27,15 @@ SECRET_KEY = "django-insecure-wuj=b#9#k=zxw(=qx6@c4!rv7j4k@vr-z_2%6yy*e2164%h=k2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+ALLOWED_HOSTS = ["*"]
 
 BACK_PROTOCOL = os.getenv("BACK_PROTOCOL")
 BACK_HOST = os.getenv("BACK_HOST")
 BACK_PORT = os.getenv("BACK_PORT", 8213)
+SECRET_KEY = "test"
 # BACK_URL = BACK_PROTOCOL + "://" + BACK_HOST
 # if BACK_PORT:
 #     BACK_URL += ":" + BACK_PORT
@@ -46,6 +50,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework_jwt",
     "back_app",
     "corsheaders",
 ]
@@ -111,14 +116,18 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
-CORS_ORIGIN_ALLOW_ALL = True
-ALLOWED_HOSTS = ["*"]
+# ALLOWED_HOSTS = ["*"]
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     "DEFAULT_PERMISSION_CLASSES": [],
     "TEST_REQUEST_DEFAULT_FORMAT": "json",
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
+    ),
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -135,6 +144,16 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+
+import datetime
+
+JWT_AUTH = {
+    "JWT_VERIFY": True,
+    "JWT_VERIFY_EXPIRATION": True,
+    "JWT_EXPIRATION_DELTA": datetime.timedelta(seconds=3000),
+    "JWT_AUTH_HEADER_PREFIX": "Bearer",
+}
 
 
 # Internationalization

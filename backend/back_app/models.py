@@ -18,7 +18,7 @@ class Role(models.Model):
 
 class User(models.Model):
     id_user = models.AutoField(primary_key=True)
-    email = models.CharField(unique=True, max_length=300, blank=True, null=True)
+    email = models.CharField(unique=True, max_length=255, blank=True, null=True)
     password = models.CharField(max_length=500, blank=True, null=True)
     role = models.ForeignKey("Role", models.DO_NOTHING, db_column="role")
 

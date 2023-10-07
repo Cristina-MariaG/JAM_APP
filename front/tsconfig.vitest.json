@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.app.json",
   "exclude": [],
+  // "include": ["src/**/*.json", "src/locales/en.js"],
   "compilerOptions": {
     "composite": true,
     "lib": [],
