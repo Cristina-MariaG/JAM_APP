@@ -43,9 +43,9 @@ export const useAuthStore = defineStore('auth', {
         return false
       }
     },
-    async signIn(payload: AuthForm) {
+    async signup(payload: AuthForm) {
       try {
-        const { accessToken } = await authRepository.signIn(payload)
+        const { accessToken } = await authRepository.signup(payload)
         // this.accessToken = accessToken
         this.$patch({ accessToken })
         return true

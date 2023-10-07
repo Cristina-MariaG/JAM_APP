@@ -10,8 +10,8 @@ export class AuthRepository {
     const { data } = await this.axios.post<LoginData>('/login/', payload)
     return data
   }
-  async signIn(payload: AuthForm) {
-    const { data } = await this.axios.post<LoginData>('/signIn/', payload)
+  async signup(payload: AuthForm) {
+    const { data } = await this.axios.post<LoginData>('/signup/', payload)
     return data
   }
 }

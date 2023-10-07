@@ -6,6 +6,7 @@ import { useAuthStore } from '@/stores/auth'
 import { computed } from 'vue'
 
 const drawer = ref(false)
+// const cartItemCount = ref(5)
 
 const authStore = useAuthStore()
 
@@ -39,48 +40,50 @@ const list = ref<HeaderItem[]>([
 </script>
 
 <template>
-  <v-layout>
-    <v-app-bar color="primary" prominent>
-      <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+  <v-app-bar color="indigo-darken-3" prominent>
+    <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title> <RouterLink to="/">JAM Shop</RouterLink></v-toolbar-title>
+    <v-toolbar-title> <RouterLink to="/">JAM Shop</RouterLink></v-toolbar-title>
 
-      <v-spacer></v-spacer>
+    <v-spacer></v-spacer>
 
-      <div class="langueSelector mt-2">
-        <v-select
-          center-affix
-          v-model="$i18n.locale"
-          :items="langItems"
-          variant="underlined"
-          :label="$t('header.language')"
-        ></v-select>
-      </div>
-      <div v-if="userAuthenticated">
-        <span>
-          {{ userEmail }}
-        </span>
-        <v-btn @click="logOutUser">Disconnect</v-btn>
-      </div>
-      <div v-else>
-        <v-btn color="indigo-darken-3" variant="flat" class="mx-5">
-          <RouterLink to="/login">Connexion</RouterLink></v-btn
-        >
-        <v-btn color="indigo-darken-3" variant="flat"
-          ><RouterLink to="/signIn">Inscription</RouterLink>
-        </v-btn>
-      </div>
-
-      <v-btn variant="text" icon="mdi-filter"></v-btn>
-    </v-app-bar>
-
-    <v-navigation-drawer expand-on-hover rail>
-      <v-list :items="list"></v-list>
-    </v-navigation-drawer>
-  </v-layout>
+    <div class="mt-2 mr-5">
+      <v-select v-model="$i18n.locale" :items="langItems" variant="underlined"></v-select>
+      <!-- :label="$t('header.language')" -->
+    </div>
+    <v-btn>
+      <v-icon size="large" color="white" icon="mdi-cart-outline"></v-icon>
+      <!-- <div class="badge" v-if="cartItemCount > 0">{{ cartItemCount }}</div> -->
+    </v-btn>
+    <div v-if="userAuthenticated">
+      <span>
+        {{ userEmail }}
+      </span>
+      <v-btn @click="logOutUser">Disconnect</v-btn>
+    </div>
+    <div v-else>
+      <v-btn color="indigo-darken-3" variant="flat" class="mx-5">
+        <RouterLink to="/login">Connexion</RouterLink></v-btn
+      >
+      <v-btn color="indigo-darken-3" variant="flat"
+        ><RouterLink to="/signup">Inscription</RouterLink>
+      </v-btn>
+    </div>
+  </v-app-bar>
+  <v-navigation-drawer v-model="drawer" location="left" temporary>
+    <v-list :items="list"></v-list>
+  </v-navigation-drawer>
 </template>
 <style>
-.langueSelector {
-  padding-top: 0.2em;
+.badge {
+  content: attr(value);
+  font-size: 12px;
+  background: red;
+  border-radius: 50%;
+  padding: 3px;
+  position: relative;
+  left: -8px;
+  top: -10px;
+  opacity: 0.9;
 }
 </style>

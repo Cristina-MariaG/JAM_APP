@@ -19,9 +19,6 @@ logger = logging.getLogger("jam")
 class UserCollection(APIView):
     @HandleError.handle_error("User collection post -")
     def post(self, request, *args, **kwargs):
-        # logger.debug("Start Collection post user")
-        response = dict()
-
         password = request.data["password"]
         email = request.data["email"]
         user = User.objects.get(email=email)
@@ -33,25 +30,9 @@ class UserCollection(APIView):
         if user:
             try:
                 refresh = RefreshToken.for_user(user)
-                # payload = jwt_payload_handler(user)
-
-                # # token = jwt.encode(payload, settings.SECRET_KEY)
-                # token = jwt_encode_handler(payload, settings.SECRET_KEY)
-
                 user_details = {}
-
-                logger.error("*************")
-                logger.error(user_details)
-                #             {
-
                 user_details["token"] = str(refresh.access_token)
                 user_details["user"] = {"email": user.email}
-                logger.error("*************")
-                logger.error(user_details)
-                #             {
-                #     'refresh': str(refresh),
-                #     'access': str(refresh.access_token),
-                # }
 
                 return Response(user_details, status=status.HTTP_200_OK)
 
@@ -65,12 +46,8 @@ class UserCollection(APIView):
 
             return Response(res, status=status.HTTP_403_FORBIDDEN)
 
-        # status_code = status.HTTP_200_OK
 
-        # return Response(user, status=status_code)
-
-
-class UserSignInCollection(APIView):
+class UserSignupCollection(APIView):
     @HandleError.handle_error("User collection post -")
     def post(self, request, *args, **kwargs):
         logger.debug("Start Collection post user")
@@ -93,7 +70,6 @@ class UserSignInCollection(APIView):
             user_details = {}
             user_details["token"] = str(refresh.access_token)
             user_details["user"] = {"email": user.email}
-            logger.error(user_details)
 
             return Response(user_details, status=status.HTTP_200_OK)
         else:
@@ -102,6 +78,3 @@ class UserSignInCollection(APIView):
             }
 
             return Response(res, status=status.HTTP_403_FORBIDDEN)
-
-        # status_code = status.HTTP_200_OK
-        # return Response(user, status=status_code)
