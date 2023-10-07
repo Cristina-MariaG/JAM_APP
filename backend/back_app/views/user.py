@@ -9,6 +9,7 @@ from back_app.models import Role, User
 from back_app.views.utilities.handle_errors import (
     HandleError,
 )
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from django.conf import settings
 
@@ -23,15 +24,15 @@ class UserCollection(APIView):
 
         password = request.data["password"]
         email = request.data["email"]
+        user = User.objects.get(email=email)
 
         if not check_password(password, user.password):
             status_code = status.HTTP_401_UNAUTHORIZED
             return Response(status=status_code)
 
-        user = User.objects.get(email=email)
-
         if user:
             try:
+                refresh = RefreshToken.for_user(user)
                 # payload = jwt_payload_handler(user)
 
                 # # token = jwt.encode(payload, settings.SECRET_KEY)
@@ -39,9 +40,18 @@ class UserCollection(APIView):
 
                 user_details = {}
 
-                user_details["email"] = user.email
+                logger.error("*************")
+                logger.error(user_details)
+                #             {
 
-                user_details["token"] = token
+                user_details["token"] = str(refresh.access_token)
+                user_details["user"] = {"email": user.email}
+                logger.error("*************")
+                logger.error(user_details)
+                #             {
+                #     'refresh': str(refresh),
+                #     'access': str(refresh.access_token),
+                # }
 
                 return Response(user_details, status=status.HTTP_200_OK)
 
@@ -63,7 +73,7 @@ class UserCollection(APIView):
 class UserSignInCollection(APIView):
     @HandleError.handle_error("User collection post -")
     def post(self, request, *args, **kwargs):
-        # logger.debug("Start Collection post user")
+        logger.debug("Start Collection post user")
 
         password = request.data["password"]
         email = request.data["email"]
@@ -78,20 +88,12 @@ class UserSignInCollection(APIView):
         logger.error("user")
         logger.error(user)
         if user:
-            logger.error("bf payload")
-            # payload = jwt_payload_handler(user)
-            # logger.error(payload)
-
-            # # token = jwt.encode(payload, settings.SECRET_KEY)
-            # token = jwt_encode_handler(payload, settings.SECRET_KEY)
+            refresh = RefreshToken.for_user(user)
 
             user_details = {}
-            logger.error("***")
-            logger.error(user.email)
-            logger.error(user["email"])
-            user_details["email"] = user["email"]
-
-            user_details["token"] = token
+            user_details["token"] = str(refresh.access_token)
+            user_details["user"] = {"email": user.email}
+            logger.error(user_details)
 
             return Response(user_details, status=status.HTTP_200_OK)
         else:

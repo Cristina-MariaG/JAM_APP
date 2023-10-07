@@ -18,15 +18,15 @@ from django.conf import settings
 
 logger = logging.getLogger("jam")
 
+
 class HandleError(APIView):
     # @staticmethod
     def handle_error(text):
         def decorator(function):
             def wrapper(*args, **kwargs):
                 try:
-        
                     return function(*args, **kwargs)
-                
+
                 except DocumentInsertError as e:
                     recuperateUserIdAndLogError(args)
 
@@ -65,9 +65,8 @@ class HandleError(APIView):
 
                 except ValidationError as e:
                     recuperateUserIdAndLogError(args)
-                    
-                    statusCode = status.HTTP_400_BAD_REQUEST
 
+                    statusCode = status.HTTP_400_BAD_REQUEST
 
                     logger.error(
                         f"{text}: Except ValidationError : {str(e)}. {statusCode}"
@@ -82,7 +81,6 @@ class HandleError(APIView):
                         {"status": "DatabaseError"},
                         status.HTTP_500_INTERNAL_SERVER_ERROR,
                     )
-
 
                 except Exception as e:
                     recuperateUserIdAndLogError(args)
@@ -104,8 +102,10 @@ def recuperateUserIdAndLogError(args):
         if isinstance(arg, Request):
             request = arg
             user_value = request.session.get("user", None)
+            logger.error("here")
             if user_value:
                 id_user = request.session["user"]["id"]
+            logger.error(user_value)
 
     if id_user:
         logger.error(f"Except Exception user with id: {str(id_user)}")
