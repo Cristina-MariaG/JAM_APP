@@ -264,6 +264,211 @@
         }
     },
     {
+        "model": "back_app.user",
+        "pk": 1,
+        "fields": {
+            "email": "arcusi_cristina@yahoo.com",
+            "password": "Cr1st1n@",
+            "role": 1
+        }
+    },
+    {
+        "model": "back_app.brand",
+        "pk": 1,
+        "fields": {
+            "brand": "jam 1 producter"
+        }
+    },
+    {
+        "model": "back_app.brand",
+        "pk": 2,
+        "fields": {
+            "brand": "jam 2 producter"
+        }
+    },
+    {
+        "model": "back_app.category",
+        "pk": 1,
+        "fields": {
+            "category": "Preserves"
+        }
+    },
+    {
+        "model": "back_app.category",
+        "pk": 2,
+        "fields": {
+            "category": "Jellies"
+        }
+    },
+    {
+        "model": "back_app.category",
+        "pk": 3,
+        "fields": {
+            "category": "Jams"
+        }
+    },
+    {
+        "model": "back_app.flavor",
+        "pk": 1,
+        "fields": {
+            "flavor": "vanilla"
+        }
+    },
+    {
+        "model": "back_app.flavor",
+        "pk": 2,
+        "fields": {
+            "flavor": "strawberies"
+        }
+    },
+    {
+        "model": "back_app.flavor",
+        "pk": 3,
+        "fields": {
+            "flavor": "orange"
+        }
+    },
+    {
+        "model": "back_app.flavor",
+        "pk": 4,
+        "fields": {
+            "flavor": "lemon"
+        }
+    },
+    {
+        "model": "back_app.flavor",
+        "pk": 5,
+        "fields": {
+            "flavor": "fruit flavour"
+        }
+    },
+    {
+        "model": "back_app.ingredient",
+        "pk": 1,
+        "fields": {
+            "ingredient": "sugar"
+        }
+    },
+    {
+        "model": "back_app.ingredient",
+        "pk": 2,
+        "fields": {
+            "ingredient": "lemon juice"
+        }
+    },
+    {
+        "model": "back_app.ingredient",
+        "pk": 3,
+        "fields": {
+            "ingredient": "strawberries"
+        }
+    },
+    {
+        "model": "back_app.ingredient",
+        "pk": 4,
+        "fields": {
+            "ingredient": "peaches"
+        }
+    },
+    {
+        "model": "back_app.ingredient",
+        "pk": 5,
+        "fields": {
+            "ingredient": "abricot"
+        }
+    },
+    {
+        "model": "back_app.ingredient",
+        "pk": 6,
+        "fields": {
+            "ingredient": "water"
+        }
+    },
+    {
+        "model": "back_app.ingredient",
+        "pk": 7,
+        "fields": {
+            "ingredient": "vanilla"
+        }
+    },
+    {
+        "model": "back_app.ingredient",
+        "pk": 8,
+        "fields": {
+            "ingredient": "honey"
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 1,
+        "fields": {
+            "product": 1,
+            "ingredient": 1,
+            "quantity": 2.5
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 2,
+        "fields": {
+            "product": 1,
+            "ingredient": 2,
+            "quantity": 1.0
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 3,
+        "fields": {
+            "product": 2,
+            "ingredient": 3,
+            "quantity": 2.5
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 4,
+        "fields": {
+            "product": 2,
+            "ingredient": 2,
+            "quantity": 1.0
+        }
+    },
+    {
+        "model": "back_app.product",
+        "pk": 1,
+        "fields": {
+            "name": "cerises",
+            "description": "confiture à cerise",
+            "image": "cerises.jpeg",
+            "price": "2",
+            "flavor": 1,
+            "type_contenant": 1,
+            "brand": 1,
+            "promotion": 1,
+            "stock_disponible": 1,
+            "category": 1,
+            "quantity": 150.0
+        }
+    },
+    {
+        "model": "back_app.product",
+        "pk": 2,
+        "fields": {
+            "name": "figue",
+            "description": "confiture à figue",
+            "image": "figue.jpeg",
+            "price": "3",
+            "flavor": 2,
+            "type_contenant": 2,
+            "brand": 2,
+            "promotion": 0,
+            "stock_disponible": 1,
+            "category": 2,
+            "quantity": 150.0
+        }
+    },
+    {
         "model": "back_app.role",
         "pk": 1,
         "fields": {
@@ -278,12 +483,45 @@
         }
     },
     {
-        "model": "back_app.user",
+        "model": "back_app.role",
+        "pk": 3,
+        "fields": {
+            "role": "superadmin"
+        }
+    },
+    {
+        "model": "back_app.stockdisponible",
         "pk": 1,
         "fields": {
-            "email": "arcusi_cristina@yahoo.com",
-            "password": "Cr1st1n@",
-            "role": 1
+            "stock_disponible": "true"
+        }
+    },
+    {
+        "model": "back_app.stockdisponible",
+        "pk": 2,
+        "fields": {
+            "stock_disponible": "false"
+        }
+    },
+    {
+        "model": "back_app.typecontenant",
+        "pk": 1,
+        "fields": {
+            "type_contenant": "glass"
+        }
+    },
+    {
+        "model": "back_app.typecontenant",
+        "pk": 2,
+        "fields": {
+            "type_contenant": "plastic"
+        }
+    },
+    {
+        "model": "back_app.typecontenant",
+        "pk": 3,
+        "fields": {
+            "type_contenant": "metal"
         }
     }
 ]

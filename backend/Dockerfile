@@ -28,6 +28,6 @@ RUN pip3 install mysqlclient==2.0.3
 RUN pip3 install mysql-connector-python==8.0.33
 RUN pip3 install pyyaml==6.0
 RUN pip3 install django-cors-headers==3.10.0
-RUN pip3 install rest_framework_simplejwt==0.0.2
+RUN pip3 install djangorestframework-simplejwt==0.0.2
 
 
