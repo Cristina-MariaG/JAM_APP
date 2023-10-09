@@ -10,7 +10,7 @@ export interface AuthForm {
 }
 
 export interface LoginData {
-  accessToken: string
+  token: string
   user: {
     email: string
   }

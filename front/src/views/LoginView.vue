@@ -3,11 +3,11 @@ import { reactive, ref, toRaw } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
 import Swal from 'sweetalert2'
-import { useValidationRules } from '@/composables/validateForm' // Assurez-vous d'importer correctement le chemin du composable
+import { useValidationRules } from '@/composables/validateForm'
 
+const validationRules = useValidationRules()
 const authStore = useAuthStore()
 const router = useRouter()
-const validationRules = useValidationRules()
 
 const form = reactive({
   email: '',

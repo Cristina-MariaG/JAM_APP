@@ -1,5 +1,7 @@
 @import './base.css';
-
+body {
+  color: black;
+}
 #app {
   max-width: 100%;
   /* margin: 0 auto;

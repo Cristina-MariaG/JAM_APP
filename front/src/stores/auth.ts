@@ -3,21 +3,23 @@ import type { AuthForm } from '@/types/auth.types'
 import { defineStore } from 'pinia'
 
 interface UserStoreState {
-  accessToken: string
+  token: string
   email: string
-  failedCount: number
+  token: string
 }
 
 export const useAuthStore = defineStore('auth', {
   state: (): UserStoreState => ({
-    accessToken: '',
-    email: '',
-    failedCount: 0
+    token: '',
+    email: ''
   }),
 
   getters: {
     isAuth(state) {
-      return state.accessToken !== ''
+      return state.token !== ''
+    },
+    getToken(state) {
+      return state.token
     },
     getEmail(state) {
       console.log(state.email)
@@ -29,28 +31,23 @@ export const useAuthStore = defineStore('auth', {
     async login(payload: AuthForm) {
       try {
         const {
-          accessToken,
+          token,
           user: { email }
         } = await authRepository.login(payload)
-        // this.accessToken = accessToken
-        console.log('email', email)
-        this.$patch({ accessToken })
-        console.log(email, 'user')
-        this.$patch({ email })
+
+        console.log(token)
+        this.$patch({ email, token })
         return true
       } catch (err) {
-        this.failedCount++
         return false
       }
     },
     async signup(payload: AuthForm) {
       try {
-        const { accessToken } = await authRepository.signup(payload)
-        // this.accessToken = accessToken
-        this.$patch({ accessToken })
+        await authRepository.signup(payload)
+
         return true
       } catch (err) {
-        this.failedCount++
         return false
       }
     },
@@ -59,9 +56,9 @@ export const useAuthStore = defineStore('auth', {
         this.$reset()
         return true
       } catch (err) {
-        this.failedCount++
         return false
       }
     }
-  }
+  },
+  persist: true
 })

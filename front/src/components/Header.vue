@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import { ref, reactive, toRaw } from 'vue'
-import type { HeaderItem } from '@/types/headerItems.types'
 import { useAuthStore } from '@/stores/auth'
 import { computed } from 'vue'
+import router from '@/router'
 
 const drawer = ref(false)
 // const cartItemCount = ref(5)
@@ -11,6 +11,9 @@ const drawer = ref(false)
 const authStore = useAuthStore()
 
 const userEmail = computed(() => authStore.getEmail)
+const userToken = computed(() => authStore.getToken)
+
+console.log(userToken.value, userEmail.value)
 
 const userAuthenticated = computed(() => authStore.isAuth)
 
@@ -19,24 +22,10 @@ const logOutUser = () => {
 }
 
 const langItems = ref<string[]>(['fr', 'en'])
-const list = ref<HeaderItem[]>([
-  {
-    title: 'Foo',
-    value: 'foo'
-  },
-  {
-    title: 'Bar',
-    value: 'bar'
-  },
-  {
-    title: 'Fizz',
-    value: 'fizz'
-  },
-  {
-    title: 'Buzz',
-    value: 'buzz'
-  }
-])
+const redirectToCart = () => {
+  // Utilisez Vue Router pour rediriger vers la page de détails du produit
+  router.push('cart/')
+}
 </script>
 
 <template>
@@ -51,8 +40,10 @@ const list = ref<HeaderItem[]>([
       <v-select v-model="$i18n.locale" :items="langItems" variant="underlined"></v-select>
       <!-- :label="$t('header.language')" -->
     </div>
-    <v-btn>
-      <v-icon size="large" color="white" icon="mdi-cart-outline"></v-icon>
+    <v-btn @click="redirectToCart">
+      <v-icon size="large" color="white" icon="mdi-cart-outline"
+        ><RouterLink to="/cart"></RouterLink
+      ></v-icon>
       <!-- <div class="badge" v-if="cartItemCount > 0">{{ cartItemCount }}</div> -->
     </v-btn>
     <div v-if="userAuthenticated">
@@ -71,7 +62,17 @@ const list = ref<HeaderItem[]>([
     </div>
   </v-app-bar>
   <v-navigation-drawer v-model="drawer" location="left" temporary>
-    <v-list :items="list"></v-list>
+    <!-- <v-list :items="list"></v-list> -->
+    <p>
+      <RouterLink to="/">Home</RouterLink>
+    </p>
+    <p @click="logOutUser">Deconexion</p>
+    <p>
+      <RouterLink to="/login">Connexion</RouterLink>
+    </p>
+    <p>
+      <RouterLink to="/signup">Inscription</RouterLink>
+    </p>
   </v-navigation-drawer>
 </template>
 <style>

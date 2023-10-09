@@ -3,8 +3,8 @@ import { type Ref } from 'vue'
 import { ref, reactive, toRaw } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
-import Swal from 'sweetalert2'
 import { useValidationRules } from '@/composables/validateForm'
+import Swal from 'sweetalert2'
 
 const validationRules = useValidationRules()
 const authStore = useAuthStore()
