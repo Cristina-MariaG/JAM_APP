@@ -9,10 +9,10 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
-import sys
 from pathlib import Path
 import os
+
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,11 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-wuj=b#9#k=zxw(=qx6@c4!rv7j4k@vr-z_2%6yy*e2164%h=k2"
+SECRET_KEY = "testdfdsfsdkl"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY")
+STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -35,12 +37,6 @@ ALLOWED_HOSTS = ["*"]
 BACK_PROTOCOL = os.getenv("BACK_PROTOCOL")
 BACK_HOST = os.getenv("BACK_HOST")
 BACK_PORT = os.getenv("BACK_PORT", 8213)
-SECRET_KEY = "test"
-# BACK_URL = BACK_PROTOCOL + "://" + BACK_HOST
-# if BACK_PORT:
-#     BACK_URL += ":" + BACK_PORT
-
-# Application definition
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -86,10 +82,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "back.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 DB_MOTEUR_ENGINE = os.getenv("DB_MOTEUR_ENGINE", "django.db.backends.mysql")
 DB_MOTEUR_NAME = os.getenv("DB_MOTEUR_NAME", None)  # mysql database name
 DB_MOTEUR_NAME_TEST = os.getenv("DB_MOTEUR_NAME_TEST", None)  # mysql database test name
@@ -113,14 +105,9 @@ DATABASES = {
         },
     },
 }
-# Password validation
-# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
-# ALLOWED_HOSTS = ["*"]
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
     "DEFAULT_PERMISSION_CLASSES": [],
     "TEST_REQUEST_DEFAULT_FORMAT": "json",
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -146,16 +133,25 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-import datetime
-
-JWT_AUTH = {
-    "JWT_VERIFY": True,
-    "JWT_VERIFY_EXPIRATION": True,
-    "JWT_EXPIRATION_DELTA": datetime.timedelta(seconds=3000),
-    "JWT_AUTH_HEADER_PREFIX": "Bearer",
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
+    "SLIDING_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": False,
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": SECRET_KEY,  # Clé secrète de votre application
+    "VERIFYING_KEY": None,
+    "AUTH_HEADER_TYPES": ("Bearer","JWT"),
+    "USER_ID_CLAIM": "user_id",
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+    "SLIDING_TOKEN_REFRESH": False,
+    "SLIDING_TOKEN_LIFETIME": timedelta(days=1),
+    "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
+    "SLIDING_TOKEN_REFRESH_GRACE_PERIOD": timedelta(days=0),
 }
 
-
+# Exemple de réglage de la durée de vie du token de rafraîchissement (facultatif)
+SIMPLE_JWT["JWT_REFRESH_TOKEN_LIFETIME"] = timedelta(days=30)
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 

@@ -439,7 +439,7 @@
         "pk": 1,
         "fields": {
             "name": "cerises",
-            "description": "confiture à cerise",
+            "description": "confiture à la cerises",
             "image": "cerises.jpeg",
             "price": "2",
             "flavor": 1,
@@ -456,9 +456,43 @@
         "pk": 2,
         "fields": {
             "name": "figue",
-            "description": "confiture à figue",
+            "description": "confiture à la figue",
             "image": "figue.jpeg",
             "price": "3",
+            "flavor": 2,
+            "type_contenant": 2,
+            "brand": 2,
+            "promotion": 0,
+            "stock_disponible": 1,
+            "category": 2,
+            "quantity": 150.0
+        }
+    },
+    {
+        "model": "back_app.product",
+        "pk": 3,
+        "fields": {
+            "name": "banane",
+            "description": "confiture à la banane",
+            "image": "figue.jpeg",
+            "price": "7",
+            "flavor": 2,
+            "type_contenant": 2,
+            "brand": 2,
+            "promotion": 0,
+            "stock_disponible": 1,
+            "category": 2,
+            "quantity": 150.0
+        }
+    },
+    {
+        "model": "back_app.product",
+        "pk": 4,
+        "fields": {
+            "name": "abricot",
+            "description": "confiture à abricot",
+            "image": "figue.jpeg",
+            "price": "5",
             "flavor": 2,
             "type_contenant": 2,
             "brand": 2,
