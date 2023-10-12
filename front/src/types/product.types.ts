@@ -1,22 +1,22 @@
 export interface Product {
   id: number
   name: string
-  description: string | null
+  description: string
   image: string
   price: number
-  flavor: number // Remplacez par le type approprié pour Flavor
-  type_contenant: number // Remplacez par le type approprié pour TypeContenant
-  brand: number // Remplacez par le type approprié pour Brand
+  flavor: number
+  type_contenant: number
+  brand: number
   promotion: number
-  stock_disponible: number // Remplacez par le type approprié pour StockDisponible
-  category: number // Remplacez par le type approprié pour Category
+  stock_disponible: number
+  category: number
   quantity: number
   ingredients: ProductIngredient[]
 }
 
 export interface ProductIngredient {
   id: number
-  ingredient: Ingredient // Remplacez par le type approprié pour Ingredient
+  ingredient: Ingredient
   quantity: number
 }
 
@@ -24,6 +24,7 @@ export interface Ingredient {
   id: number
   ingredient: string
 }
+
 export interface ProductsData {
   products: Product[]
 }

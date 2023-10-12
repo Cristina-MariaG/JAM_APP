@@ -18,7 +18,6 @@ export class ProductRepository {
   }
   async getProductWithId(id: string) {
     try {
-      // const { data } = await this.axios.get<any, AxiosResponse<any, any>, any>('/products/')
       const { data } = await this.axios.get<Product>(`/product/${id}`)
       return data
     } catch (error) {

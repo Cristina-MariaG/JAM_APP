@@ -3,7 +3,6 @@ import type { AuthForm } from '@/types/auth.types'
 import { defineStore } from 'pinia'
 
 interface UserStoreState {
-  token: string
   email: string
   token: string
 }
@@ -51,13 +50,8 @@ export const useAuthStore = defineStore('auth', {
         return false
       }
     },
-    async logout() {
-      try {
-        this.$reset()
-        return true
-      } catch (err) {
-        return false
-      }
+    logout() {
+      this.$reset()
     }
   },
   persist: true

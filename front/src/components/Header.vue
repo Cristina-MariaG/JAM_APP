@@ -4,11 +4,12 @@ import { ref, reactive, toRaw } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { computed } from 'vue'
 import router from '@/router'
+import { useCartStore } from '@/stores/cart'
 
 const drawer = ref(false)
-// const cartItemCount = ref(5)
 
 const authStore = useAuthStore()
+const cartStore = useCartStore()
 
 const userEmail = computed(() => authStore.getEmail)
 const userToken = computed(() => authStore.getToken)
@@ -19,12 +20,13 @@ const userAuthenticated = computed(() => authStore.isAuth)
 
 const logOutUser = () => {
   authStore.logout()
+  cartStore.resetStore()
 }
 
 const langItems = ref<string[]>(['fr', 'en'])
+
 const redirectToCart = () => {
-  // Utilisez Vue Router pour rediriger vers la page de détails du produit
-  router.push('cart/')
+  router.push({ name: 'cart' })
 }
 </script>
 
@@ -44,7 +46,9 @@ const redirectToCart = () => {
       <v-icon size="large" color="white" icon="mdi-cart-outline"
         ><RouterLink to="/cart"></RouterLink
       ></v-icon>
-      <!-- <div class="badge" v-if="cartItemCount > 0">{{ cartItemCount }}</div> -->
+      <div class="badge" v-if="cartStore.cartProductsNumber > 0">
+        {{ cartStore.cartProductsNumber }}
+      </div>
     </v-btn>
     <div v-if="userAuthenticated">
       <span>
@@ -62,11 +66,10 @@ const redirectToCart = () => {
     </div>
   </v-app-bar>
   <v-navigation-drawer v-model="drawer" location="left" temporary>
-    <!-- <v-list :items="list"></v-list> -->
     <p>
       <RouterLink to="/">Home</RouterLink>
     </p>
-    <p @click="logOutUser">Deconexion</p>
+    <p v-if="authStore.isAuth" @click="logOutUser">Deconexion</p>
     <p>
       <RouterLink to="/login">Connexion</RouterLink>
     </p>

@@ -24,7 +24,6 @@ const cards = [
     <h1>Détails du produit</h1>
     <p>ID du produit : {{ props.productId }}</p>
     {{ product }}
-    <!-- Affichez les détails du produit en fonction de l'ID -->
   </div>
   <!-- 
   <div v-if="product" class="product-detail">
@@ -69,7 +68,7 @@ const cards = [
 
   <v-container fluid>
     <v-row dense>
-         <v-col> test </v-col>
+      <v-col> test </v-col>
       <v-col> test </v-col>
       <!-- <v-col v-for="card in cards" :key="card.title" :cols="card.flex">
         <v-card>
