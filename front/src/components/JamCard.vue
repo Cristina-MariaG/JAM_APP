@@ -9,7 +9,7 @@ const router = useRouter()
 
 const quantityOptions = ref([1, 2, 3, 4, 5])
 const getImage = (image: string) => {
-  return `public/uploads/${image}`
+  return `/uploads/${image}`
 }
 const { product } = defineProps<{
   product: Product

@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink } from 'vue-router'
 
-import { ref, defineProps, reactive, toRaw } from 'vue'
-// import StripeView from '@/views/StripeView.vue'
-import { useRouter } from 'vue-router'
+import { toRaw } from 'vue'
 import { useCartStore } from '@/stores/cart'
 import { stripeRepository } from '@/helpers/api'
 
 import { useAuthStore } from '@/stores/auth'
-import Swal from 'sweetalert2'
 import HrComponent from '@/components/HrComponent.vue'
 
 const authStore = useAuthStore()
@@ -28,9 +25,7 @@ const redirectToStripe = async () => {
   }
 
   const { url, order_id: orderId } = await stripeRepository.createCheckoutSession(toRaw(orderData))
-  console.log(orderId)
   cartStore.setWaitingPaymentOrderId(orderId)
-  console.log(cartStore.getOrderId)
   window.location.href = url
 }
 </script>
@@ -38,7 +33,7 @@ const redirectToStripe = async () => {
 <template>
   <div>
     <div v-if="cartStore.productsNumber === 0">
-      <p>Le panier est vide</p>
+      <h1 class="text-center">Le panier est vide</h1>
     </div>
     <div v-else style="width: 80%" class="mx-auto mt-5">
       <v-card>
@@ -72,8 +67,7 @@ const redirectToStripe = async () => {
                       <p>Total Price</p>
                     </v-col>
                   </v-row>
-                  <!-- <hr class="gray-line" /> -->
-                          <HrComponent/>
+                  <HrComponent />
                   <div v-for="product in cartStore.getCart" :key="product.id">
                     <v-row dense>
                       <v-col cols="3">
@@ -92,7 +86,7 @@ const redirectToStripe = async () => {
                         <p>{{ getTotalPrice(product.price, product.selectedQuantity) }} €</p>
                       </v-col>
                     </v-row>
-                  <HrComponent/>
+                    <HrComponent />
                   </div>
                 </v-container>
               </div>
@@ -100,7 +94,6 @@ const redirectToStripe = async () => {
 
             <v-col col="4" class="ps-5">
               <div>
-                <!-- En-tête -->
                 <div class="d-flex">
                   <h1 class="ma-2 pa-2 me-auto">Synthèse</h1>
                 </div>
@@ -108,9 +101,7 @@ const redirectToStripe = async () => {
                   <hr class="gray-line" />
                 </div>
 
-                <!-- Contenu de la synthèse -->
                 <div class="d-flex flex-column">
-                  <!-- Total -->
                   <div class="align-start">
                     <div class="align-self-start d-flex">
                       <h1 class="ma-2 pa-2 me-auto">Total</h1>
@@ -118,7 +109,6 @@ const redirectToStripe = async () => {
                     </div>
                   </div>
 
-                  <!-- Message si non authentifié -->
                   <div class="align-end mt-auto" v-if="!authStore.isAuth">
                     <p>Vous devez être connecté pour pouvoir commander</p>
                     <div class="mt-5">
@@ -126,60 +116,23 @@ const redirectToStripe = async () => {
                         <RouterLink to="/login">Connexion</RouterLink>
                       </v-btn>
                       <v-btn color="indigo-darken-3" variant="flat">
-                        <RouterLink to="/signup">Inscription</RouterLink>
+                        <RouterLink to="/inscription">Inscription</RouterLink>
                       </v-btn>
                     </div>
                   </div>
 
-                  <!-- Bouton Valider le panier si authentifié -->
                   <div v-else class="align-end mt-auto">
                     <v-btn color="indigo-darken-3" variant="flat" @click="redirectToStripe">
                       Valider le panier</v-btn
                     >
-                    <!-- <StripeView /> -->
                   </div>
                 </div>
               </div>
             </v-col>
-
-            <!-- <v-col col="4" class="ps-5">
-              <div>
-                <div class="d-flex">
-                  <h1 class="ma-2 pa-2 me-auto">Synthese</h1>
-                </div>
-                <div>
-                  <hr class="gray-line" />
-                </div>
-                <div class="d-flex flex-column">
-                  <div class="align-start">
-                    <div class="align-self-start d-flex">
-                      <h1 class="ma-2 pa-2 me-auto">Total</h1>
-                      <h1 class="ma-2 pa-2 me-auto">{{ cartStore.totalPrice }} €</h1>
-                    </div>
-                  </div>
-                  <div class="align-end mt-auto" v-if="!authStore.isAuth">
-                    <p>Vous devez etre connecté pour pouvoir comander</p>
-                    <div class="mt-5">
-                      <v-btn color="indigo-darken-3" variant="flat" class="mx-5">
-                        <RouterLink to="/login">Connexion</RouterLink></v-btn
-                      >
-                      <v-btn color="indigo-darken-3" variant="flat"
-                        ><RouterLink to="/signup">Inscription</RouterLink>
-                      </v-btn>
-                    </div>
-                  </div>
-                  <div v-else class="align-end mt-auto">
-                    <v-btn color="indigo-darken-3" variant="flat">Valider le panier </v-btn>
-                  </div>
-                </div>
-              </div>
-            </v-col> -->
           </v-row>
         </v-container>
       </v-card>
     </div>
   </div>
 </template>
-<style>
-
-</style>
+<style></style>

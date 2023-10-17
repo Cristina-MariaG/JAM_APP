@@ -14,6 +14,7 @@ const form = reactive({
   password: ''
 })
 const showEmptyFieldError = ref(false)
+const validForm = ref(false)
 
 const handleSubmit = async () => {
   const isEmailValid = validationRules.emailRule[0](form.email) === true
@@ -27,7 +28,6 @@ const handleSubmit = async () => {
   if (isEmailValid && isPasswordValid) {
     const success = await authStore.login(toRaw(form))
     if (success) {
-      console.log(success)
       router.push({ name: 'home' })
     } else {
       Swal.fire({
@@ -42,7 +42,11 @@ const handleSubmit = async () => {
 <template>
   <div style="width: 50%" class="mx-auto login">
     <h1 class="text-center">Login</h1>
-    <form @submit.prevent="handleSubmit">
+    <v-form
+      v-model="validForm"
+      color="primary"
+      class="map-right-menu-source-card__source-to-district-form mt-2"
+    >
       <v-text-field
         v-model="form.email"
         label="Email"
@@ -51,6 +55,7 @@ const handleSubmit = async () => {
       <v-text-field
         v-model="form.password"
         label="Password"
+        type="password"
         :rules="validationRules.passwordRule"
       ></v-text-field>
       <v-alert class="my-5" v-if="showEmptyFieldError" type="error">
@@ -60,15 +65,17 @@ const handleSubmit = async () => {
         type="submit"
         block
         class="text-none mb-4"
+        :disabled="!validForm"
         color="indigo-darken-3"
         size="x-large"
+        @click.prevent="handleSubmit"
         variant="flat"
         >Login</v-btn
       >
-    </form>
+    </v-form>
     <p class="text-center">
       Pas de compte ?
-      <RouterLink to="/signup">Inscription</RouterLink>
+      <RouterLink to="/inscription">Inscription</RouterLink>
     </p>
   </div>
 </template>

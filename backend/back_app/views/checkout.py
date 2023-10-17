@@ -51,7 +51,7 @@ class CheckoutCollection(APIView):
         stripe.api_key = settings.STRIPE_SECRET_KEY
         checkout_session = stripe.checkout.Session.create(
             success_url=domain_url + "success?session_id={CHECKOUT_SESSION_ID}",
-            cancel_url=domain_url,
+            cancel_url=domain_url + "cancel-payment",
             payment_method_types=["card"],
             mode="payment",
             line_items=line_items,
@@ -67,10 +67,25 @@ class CheckoutSuccess(APIView):
         order_id = request.data.get("order_id")
         if not order_id or order_id == -1:
             return Response(status=status.HTTP_404_NOT_FOUND)
-    
+
         order = Order.objects.get(id=order_id)
         order.status = "PAYMENT_OK"
         order.save()
+        return Response({"status": "ok"})
+
+
+class CheckoutCancel(APIView):
+    @HandleError.handle_error("Jam CheckoutSuccess get -")
+    def delete(self, request, *args, **kwargs):
+        logger.error(request.data)
+        order_id = kwargs.get("id")
+
+        order = Order.objects.get(id=order_id)
+        if not order_id or order_id == -1 or not order:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
+            order.delete()
+
         return Response({"status": "ok"})
 
 
@@ -104,19 +119,24 @@ def create_line_order_for_order_id(order_id, product):
 
 
 def decode_token(token):
-    decoded_access_token = jwt.decode(
-        token,
-        settings.SECRET_KEY,
-        algorithms=["HS256"],
-        options={"verify_exp": True},
-    )
+    try:
+        decoded_access_token = jwt.decode(
+            token,
+            settings.SECRET_KEY,
+            algorithms=["HS256"],
+            options={"verify_exp": True},
+        )
+        logger.error(decoded_access_token)
 
-    user_id = decoded_access_token["user_id"]
-    exp_timestamp = decoded_access_token["exp"]
+        user_id = decoded_access_token["user_id"]
+        logger.error(decoded_access_token)
+        # exp_timestamp = decoded_access_token["exp"]
 
-    current_timestamp = datetime.timestamp(datetime.now())
+        # current_timestamp = datetime.timestamp(datetime.now())
 
-    if exp_timestamp < current_timestamp or not user_id:
+        if not user_id:
+            return False
+
+        return user_id
+    except Exception:
         return False
-
-    return user_id

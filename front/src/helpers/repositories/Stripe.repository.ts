@@ -13,7 +13,6 @@ export class StripeRepository {
         '/create-checkout-session/',
         orderData
       )
-      console.log('order', data)
       return data
     } catch (error: any) {
       const errorMessage = repositoryErrorHandler(error)
@@ -27,5 +26,8 @@ export class StripeRepository {
     return await this.axios.post<any, AxiosResponse<any, any>, any>('/checkout-success/', {
       order_id: orderId
     })
+  }
+  async checkoutCancel(orderId: number) {
+    return await this.axios.delete<any, AxiosResponse<any, any>, any>(`/delete-order/${orderId}`)
   }
 }

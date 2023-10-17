@@ -8,24 +8,22 @@ export class AuthRepository {
   async login(payload: AuthForm) {
     try {
       const { data } = await this.axios.post<LoginData>('/login/', payload)
-      console.log(data, 'in helpers api')
       return data
     } catch (error) {
-      // Handle errors using the repositoryErrorHandler or other error handling logic
       const errorMessage = repositoryErrorHandler(error)
       console.error('Login failed:', errorMessage)
-      throw errorMessage // Optionally, re-throw the error to the caller
+      throw errorMessage
     }
   }
 
-  async signup(payload: AuthForm) {
+  async inscription(payload: AuthForm) {
     try {
-      await this.axios.post<any, AxiosResponse<any, any>, any>('/signup/', payload)
+      await this.axios.post<any, AxiosResponse<any, any>, any>('/inscription/', payload)
       return true
     } catch (error) {
       // Handle errors using the repositoryErrorHandler or other error handling logic
       const errorMessage = repositoryErrorHandler(error)
-      console.error('Signup failed:', errorMessage)
+      console.error('inscription failed:', errorMessage)
       throw errorMessage // Optionally, re-throw the error to the caller
     }
   }

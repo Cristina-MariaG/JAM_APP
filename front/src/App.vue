@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import PageContent from './components/PageContent.vue'
+import PageContent from './components/common/PageContent.vue'
+
 </script>
 
 <template>

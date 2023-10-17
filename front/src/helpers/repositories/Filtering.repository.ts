@@ -1,41 +1,38 @@
 import { Axios, type AxiosResponse } from 'axios'
 import { repositoryErrorHandler } from '../error-handler'
-import type { FiltersStoreState, PriceRange } from '@/types/filters.types'
+import type { FiltersStoreState } from '@/types/filters.types'
 
 export class FilteringRepository {
   constructor(private axios: Axios) {}
 
-  async getCategories() {
-    try {
-      // const { data } = await this.axios.get<any, AxiosResponse<any, any>, any>('/products/')
-      const { data } = await this.axios.get<any, AxiosResponse<any, any>, any>('/category/')
-      console.log(data)
-      return data
-    } catch (error) {
-      const errorMessage = repositoryErrorHandler(error)
-      console.error('Recuperation failed:', errorMessage)
-      throw errorMessage
-    }
-  }
   async getProductsFiltered(filters: FiltersStoreState) {
     try {
-      // const { data } = await this.axios.get<any, AxiosResponse<any, any>, any>('/products/')
-      let paramsList = {}
+      let paramsList: { [key: string]: any } = {}
 
       filters.chosenFilters.forEach((filter) => {
-        console.log(filter)
         paramsList[filter] = filters[filter]
       })
       console.log(paramsList)
 
-      const { data } = await this.axios.get<any, AxiosResponse<any, any>, any>('/filter/', {
+      const { data } = await this.axios.get<any, AxiosResponse<any, any>>('/search/', {
         params: paramsList
       })
-      console.log(data)
       return data
     } catch (error) {
       const errorMessage = repositoryErrorHandler(error)
-      console.error('Recuperation failed:', errorMessage)
+      console.error('Récupération échouée :', errorMessage)
+      throw errorMessage
+    }
+  }
+  async getAllLike(searched: string) {
+    try {
+      const { data } = await this.axios.get<any, AxiosResponse<any, any>>('/search/', {
+        params: { searchedText: searched }
+      })
+      return data
+    } catch (error) {
+      const errorMessage = repositoryErrorHandler(error)
+      console.error('Récupération échouée :', errorMessage)
       throw errorMessage
     }
   }

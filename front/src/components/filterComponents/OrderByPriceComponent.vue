@@ -14,8 +14,6 @@ watch(selectedOrder, (val) => {
 
 <template>
   <div>
-    <!-- <v-checkbox label="Order by price" v-model="showOrderBy"></v-checkbox> -->
-    <!-- v-if="showOrderBy" -->
     <v-combobox
       v-model="selectedOrder"
       :items="orderedType"

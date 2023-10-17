@@ -20,34 +20,46 @@ logger = logging.getLogger("jam")
 class UserCollection(APIView):
     @HandleError.handle_error("User collection post -")
     def post(self, request, *args, **kwargs):
-        email = request.data.get("email")
-        password = request.data.get("password")
+        # email = request.data.get("email")
+        # password = request.data.get("password")
+        #         collection_serializer = AllSerializer(data=request.GET)
+        # collection_serializer.is_valid(raise_exception=True)
+        # validated_data = collection_serializer.validated_data
+
+        # collection = validated_data["collection"]
+
+        user_serializer = UserSerializer(data=request.data)
+        user_serializer.is_valid(raise_exception=True)
+        validated_data = user_serializer.validated_data
 
         try:
-            user = User.objects.get(email=email)
+            user = User.objects.get(email=validated_data["email"])
+            user_id = user.id
+   
+
+            logger.error(user_id)
         except User.DoesNotExist:
             return Response(
                 {"error": "Utilisateur non trouvé"}, status=status.HTTP_404_NOT_FOUND
             )
 
-        if not check_password(password, user.password):
+        if not check_password(validated_data["password"], user.password):
             return Response(
                 {"error": "Mot de passe incorrect"}, status=status.HTTP_401_UNAUTHORIZED
             )
 
         refresh = RefreshToken.for_user(user)
-        user_serializer = UserSerializer(user)
         logger.error(refresh)
 
         response_data = {
             "token": str(refresh),
-            "user": {"email": user_serializer.data["email"]},
+            "user": {"email": user.email},
         }
 
         return Response(response_data, status=status.HTTP_200_OK)
 
 
-class UserSignupCollection(APIView):
+class UserInscriptionCollection(APIView):
     @HandleError.handle_error("User collection post -")
     def post(self, request, *args, **kwargs):
         logger.debug("Start Collection post user")

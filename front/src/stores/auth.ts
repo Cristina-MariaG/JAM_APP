@@ -33,17 +33,15 @@ export const useAuthStore = defineStore('auth', {
           token,
           user: { email }
         } = await authRepository.login(payload)
-
-        console.log(token)
         this.$patch({ email, token })
         return true
       } catch (err) {
         return false
       }
     },
-    async signup(payload: AuthForm) {
+    async inscription(payload: AuthForm) {
       try {
-        await authRepository.signup(payload)
+        await authRepository.inscription(payload)
 
         return true
       } catch (err) {

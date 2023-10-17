@@ -4,8 +4,8 @@ export interface PriceRange {
 }
 
 export interface FiltersStoreState {
-  minPrice: number
-  maxPrice: number
+  // minPrice: number
+  // maxPrice: number
   minPriceUser: number
   maxPriceUser: number
   searchedText: string
@@ -13,8 +13,9 @@ export interface FiltersStoreState {
   promotion: Boolean | null
   flavor: string
   stockDisponible: Boolean | null
-  typeContenant: string
-  brand: string[]
+  typeContenant: string[]
+  brandList: number[]
   ordonateByPrice: string | null
   chosenFilters: string[]
+  [key: string]: any
 }

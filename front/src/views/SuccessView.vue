@@ -1,27 +1,33 @@
 <script setup lang="ts">
 import { stripeRepository } from '@/helpers/api'
 import { useCartStore } from '@/stores/cart'
+import Swal from 'sweetalert2'
 import { ref, onBeforeMount } from 'vue'
 
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
 const cartStore = useCartStore()
-// Get the cart data
 onBeforeMount(async () => {
-  console.log(cartStore.getOrderId)
   await stripeRepository
     .checkoutSuccess(cartStore.getOrderId)
     .then((response) => {
       cartStore.resetStore()
-      console.log(response)
     })
     .catch((err) => {
       console.log(err)
+      Swal.fire({
+        icon: 'error',
+        title: t('error.genericError ')
+      })
     })
-
-  //   const response = await updateOrderStatus()
 })
 </script>
 <template>
-  <h1 class="text-2xl uppercase pb-2">Votre commande a été enregistré avec success !</h1>
+  <h1 class="text-2xl uppercase pb-2">{{ $t('checkout.success') }}</h1>
 
-  <v-btn> </v-btn>
+  <v-btn color="primary">
+    <RouterLink to="/">{{ $t('home.home') }}</RouterLink>
+  </v-btn>
 </template>

@@ -3,8 +3,6 @@ import type { Product } from '@/types/product.types'
 import { reactive } from 'vue'
 
 const state = reactive<FiltersStoreState>({
-  minPrice: 0,
-  maxPrice: 0,
   minPriceUser: 0,
   maxPriceUser: 0,
   searchedText: '',
@@ -12,19 +10,13 @@ const state = reactive<FiltersStoreState>({
   promotion: null,
   flavor: '',
   stockDisponible: null,
-  typeContenant: '',
-  brand: [],
+  typeContenant: [],
+  brandList: [],
   ordonateByPrice: 'false',
   chosenFilters: []
 })
 
 function useFilters() {
-  const setMinPrice = (value: number) => {
-    state.minPrice = value
-  }
-  const setMaxPrice = (value: number) => {
-    state.maxPrice = value
-  }
   const setMinPriceUser = (value: number) => {
     state.minPriceUser = value
     state.chosenFilters.push('minPriceUser')
@@ -35,10 +27,18 @@ function useFilters() {
   }
   const setSearchedText = (value: string) => {
     state.searchedText = value
+    state.chosenFilters.push('searchedText')
   }
   const setCategoriesSearched = (value: number[]) => {
     state.categories = value
-    if (!state.chosenFilters.includes('categories')) state.chosenFilters.push('categories')
+    if (value.length === 0 && state.chosenFilters.includes('categories')) {
+      const index = state.chosenFilters.indexOf('categories')
+      if (index > -1) {
+        state.chosenFilters.splice(index, 1)
+      }
+    } else if (!state.chosenFilters.includes('categories')) {
+      state.chosenFilters.push('categories')
+    }
   }
   const setPromotion = (value: Boolean) => {
     state.promotion = value
@@ -46,67 +46,50 @@ function useFilters() {
   const setFlavour = (value: string) => {
     state.flavor = value
   }
-  const setStockDisponible = (value: Boolean) => {
-    state.stockDisponible = value
+  const setAvailableStock = (value: Boolean) => {
+    state.availableStock = value
+    state.chosenFilters.push('availableStock')
   }
-  const setTypeContenant = (value: string) => {
+  const setTypeContenant = (value: string[]) => {
     state.typeContenant = value
+    if (value.length === 0 && state.typeContenant.includes('typeContenant')) {
+      const index = state.chosenFilters.indexOf('typeContenant')
+      if (index > -1) {
+        state.chosenFilters.splice(index, 1)
+      }
+    } else if (!state.chosenFilters.includes('typeContenant')) {
+      state.chosenFilters.push('typeContenant')
+    }
   }
-  const setBrand = (value: string) => {
-    state.brand.push(value)
+  const setbrandList = (value: number[]) => {
+    state.brandList = value
+
+    if (value.length === 0 && state.typeContenant.includes('brandList')) {
+      const index = state.chosenFilters.indexOf('brandList')
+      if (index > -1) {
+        state.chosenFilters.splice(index, 1)
+      }
+    } else if (!state.chosenFilters.includes('brandList')) {
+      state.chosenFilters.push('brandList')
+    }
   }
   const setOrdonateByPrice = (value: string) => {
     state.ordonateByPrice = value
 
-    //   state.chosenFilters = state.chosenFilters.filter((item) => item !== 'ordonateByPrice')
-    // } else {
     state.chosenFilters.push('ordonateByPrice')
-    // }
-  }
-
-  const findMinMaxPrices = (products: Product[]) => {
-    if (products.length === 0) {
-      setMaxPrice(0)
-      setMinPrice(0)
-      return
-    }
-
-    const initialPrices: PriceRange = {
-      minPrice: products[0].price,
-      maxPrice: products[0].price
-    }
-
-    const { minPrice: min, maxPrice: max } = products.reduce(
-      (prices: PriceRange, product: Product) => {
-        return {
-          minPrice: Math.min(prices.minPrice, product.price),
-          maxPrice: Math.max(prices.maxPrice, product.price)
-        }
-      },
-      initialPrices
-    )
-
-    setMinPrice(min)
-    setMaxPrice(max)
-
-    // setMinPriceUser(min)
-    // setMaxPriceUser(max)
   }
 
   return {
     state,
-    setMinPrice,
-    setMaxPrice,
-    findMinMaxPrices,
     setMaxPriceUser,
     setMinPriceUser,
     setSearchedText,
-    setBrand,
+    setbrandList,
     setCategoriesSearched,
     setFlavour,
     setOrdonateByPrice,
     setPromotion,
-    setStockDisponible,
+    setAvailableStock,
     setTypeContenant
     // ref, reactive, methods, computed
   }

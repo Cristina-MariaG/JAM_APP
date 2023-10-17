@@ -1,14 +1,15 @@
 import { Axios } from 'axios'
 import { repositoryErrorHandler } from '../error-handler'
-import type { Product, ProductsData } from '@/types/product.types'
+import type { Product } from '@/types/product.types'
 
 export class ProductRepository {
   constructor(private axios: Axios) {}
 
   async getAllProducts() {
     try {
-      // const { data } = await this.axios.get<any, AxiosResponse<any, any>, any>('/products/')
-      const { data } = await this.axios.get<ProductsData>('/product/')
+      const { data } = await this.axios.get<{ products: Product[]; pages_number: number }>(
+        '/product/'
+      )
       return data
     } catch (error) {
       const errorMessage = repositoryErrorHandler(error)
@@ -16,9 +17,21 @@ export class ProductRepository {
       throw errorMessage
     }
   }
+
   async getProductWithId(id: string) {
     try {
-      const { data } = await this.axios.get<Product>(`/product/${id}`)
+      const { data } = await this.axios.get<{ product: Product }>(`/product/${id}`)
+      return data
+    } catch (error) {
+      const errorMessage = repositoryErrorHandler(error)
+      console.error('Recuperation failed:', errorMessage)
+      throw errorMessage
+    }
+  }
+
+  async getMinMAx() {
+    try {
+      const { data } = await this.axios.get(`/prices-min-max/`)
       return data
     } catch (error) {
       const errorMessage = repositoryErrorHandler(error)

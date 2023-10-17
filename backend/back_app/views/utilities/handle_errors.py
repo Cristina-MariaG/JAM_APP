@@ -66,7 +66,7 @@ class HandleError(APIView):
                         {"status": "DatabaseError"},
                         status.HTTP_500_INTERNAL_SERVER_ERROR,
                     )
-
+                
                 except Exception as e:
                     logger.error(f"{text}: Except Exception unknown error : {str(e)}")
                     return Response(

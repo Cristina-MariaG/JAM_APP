@@ -3,5 +3,39 @@
   "language": "fr",
   "header": {
     "language": "langue"
+  },
+  "home": {
+    "home": "Accueil"
+  },
+  "filters": {
+    "priceBetween": "Price entre ",
+    "category": "Categorie",
+    "contenantType": "Type contenant",
+    "stockDisponible": "Stock disponible",
+    "brand": "Marque"
+  },
+  "checkout": {
+    "cancel": "  Annulation du payement en cours.... Vous allez etre redirigé ...",
+    "success": "Votre commande a été enregistré avec success !"
+  },
+  "error": {
+    "badCredentials": "Données de connexion pas bonnes",
+    "genericError": "Une erreur generique est sourvenu..."
+  },
+  "product": {
+    "detailsTitle": "Détails du produit",
+    "category": "Catégorie :",
+    "brand": "Marque :",
+    "description": "Description :",
+    "price": "Prix :",
+    "flavor": "Saveur :",
+    "containerType": "Type contenant",
+    "stockAvailable": "Stock disponible :",
+    "yes": "Oui",
+    "no": "Non",
+    "ingredients": "Ingrédients",
+    "onPromotion": "En promotion :",
+    "yesPromotion": "oui",
+    "noPromotion": "non"
   }
 }

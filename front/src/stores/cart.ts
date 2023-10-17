@@ -35,11 +35,9 @@ export const useCartStore = defineStore('cart', {
 
   actions: {
     addToCart(product: ProductCart) {
-      // Ajoutez le produit au panier
       const productIndex = this.cart.findIndex((prod) => product.id === prod.id)
 
       if (productIndex !== -1) {
-        // Si le produit existe, remplacez-le par les nouvelles valeurs
         this.cart.splice(productIndex, 1, product)
       } else {
         this.cart.push(product)
@@ -47,7 +45,6 @@ export const useCartStore = defineStore('cart', {
       }
     },
     setWaitingPaymentOrderId(id: number) {
-      console.log(id)
       if (id > 0) {
         this.orderId = id
       }
@@ -70,6 +67,9 @@ export const useCartStore = defineStore('cart', {
 
     resetStore() {
       this.$reset()
+    },
+    resetOrderId() {
+      this.orderId = -1
     }
   },
   persist: true
