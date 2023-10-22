@@ -19,15 +19,11 @@ products_per_page = 15
 
 
 class FilterCollection(APIView):
-    @HandleError.handle_error("Jam collection get -")
+    @HandleError.handle_error("Jam FilterCollection get -")
     def get(self, request, *args, **kwargs):
+        logger.debug("Start FilterCollection get ")
+        
         response = dict()
-
-        params = request.GET.dict()
-        param1 = request.GET.getlist("categories[]", None)
-        logger.error(params)
-        logger.error(param1)
-
         min_price = request.GET.get("minPriceUser", None)
         max_price = request.GET.get("maxPriceUser", None)
         searched_text = request.GET.get("searchedText", None)
@@ -87,8 +83,6 @@ class FilterCollection(APIView):
                 else Q(),
             )
 
-        logger.error(filtered_products)
-
         page = int(request.GET.get("page", 0))
         begin_products = page * products_per_page
         end_products = begin_products + products_per_page
@@ -104,4 +98,6 @@ class FilterCollection(APIView):
         serializer = ProductsSerializer(filtered_products, many=True)
         response["products"] = serializer.data
         response["pages_number"] = total_pages
+
+        logger.debug("End FilterCollection get ")
         return Response(response)

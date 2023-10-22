@@ -14,7 +14,7 @@ export class FilteringRepository {
       })
       console.log(paramsList)
 
-      const { data } = await this.axios.get<any, AxiosResponse<any, any>>('/search/', {
+      const { data } = await this.axios.get<any, AxiosResponse<any, any>>('/filter/', {
         params: paramsList
       })
       return data
@@ -26,7 +26,7 @@ export class FilteringRepository {
   }
   async getAllLike(searched: string) {
     try {
-      const { data } = await this.axios.get<any, AxiosResponse<any, any>>('/search/', {
+      const { data } = await this.axios.get<any, AxiosResponse<any, any>>('/filter/', {
         params: { searchedText: searched }
       })
       return data

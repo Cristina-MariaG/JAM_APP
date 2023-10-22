@@ -11,8 +11,9 @@ logger = logging.getLogger("jam")
 
 
 class CategoryCollection(APIView):
-    @HandleError.handle_error("Jam collection get -")
+    @HandleError.handle_error("Jam CategoryCollection get -")
     def get(self, request, *args, **kwargs):
+        logger.debug("Start CategoryCollection get")
         response = dict()
 
         categories = Category.objects.all()
@@ -20,4 +21,5 @@ class CategoryCollection(APIView):
 
         response["categories"] = serializer.data
 
+        logger.debug("End CategoryCollection get")
         return Response(response)

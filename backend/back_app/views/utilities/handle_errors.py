@@ -1,9 +1,4 @@
 from rest_framework import status
-from arango import (
-    DocumentDeleteError,
-    DocumentGetError,
-    DocumentInsertError,
-)
 
 from rest_framework.serializers import ValidationError
 from django.core.exceptions import ObjectDoesNotExist
@@ -11,7 +6,7 @@ from django.db import DatabaseError
 import logging
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
+from rest_framework_simplejwt.exceptions import TokenError
 
 logger = logging.getLogger("jam")
 
@@ -23,27 +18,21 @@ class HandleError(APIView):
                 try:
                     return function(*args, **kwargs)
 
-                except DocumentInsertError as e:
-                    logger.error(f"{text}: Except DocumentInsertError : {str(e)}")
-
-                    return Response(
-                        {"status": "Internal server error"},
-                        status.HTTP_500_INTERNAL_SERVER_ERROR,
-                    )
-
-                except DocumentGetError as e:
-                    logger.error(f"{text}: Except DocumentGetError : {str(e)}")
-                    return Response(
-                        {"status": "Internal server error"},
-                        status.HTTP_500_INTERNAL_SERVER_ERROR,
-                    )
-
-                except DocumentDeleteError as e:
-                    logger.error(f"{text}: Except DocumentDeleteError : {str(e)}")
-                    return Response(
-                        {"status": "Internal server error"},
-                        status.HTTP_500_INTERNAL_SERVER_ERROR,
-                    )
+                except TokenError as e:
+                    if (
+                        isinstance(e, TokenError)
+                        and str(e) == "Token is invalid or expired"
+                    ):
+                        return Response(
+                            {"error": "Token invalide ou expiré"},
+                            status=status.HTTP_401_UNAUTHORIZED,
+                        )
+                    else:
+                        logger.error(e)
+                        return Response(
+                            {"error": "Erreur de token inconnue"},
+                            status=status.HTTP_400_BAD_REQUEST,
+                        )
                 except ObjectDoesNotExist as e:
                     logger.error(f"{text}: Except ObjectDoesNotExist : {str(e)}")
                     return Response(
@@ -66,7 +55,7 @@ class HandleError(APIView):
                         {"status": "DatabaseError"},
                         status.HTTP_500_INTERNAL_SERVER_ERROR,
                     )
-                
+
                 except Exception as e:
                     logger.error(f"{text}: Except Exception unknown error : {str(e)}")
                     return Response(
@@ -77,4 +66,3 @@ class HandleError(APIView):
             return wrapper
 
         return decorator
-

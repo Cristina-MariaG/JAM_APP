@@ -1,30 +1,25 @@
 import { Axios, type AxiosResponse } from 'axios'
-import { repositoryErrorHandler } from '../error-handler'
-import type { ProductCart } from '@/types/cart.types'
-import Swal from 'sweetalert2'
+
 import type { OrderData } from '@/types/order.types'
 
 export class StripeRepository {
   constructor(private axios: Axios) {}
 
   async createCheckoutSession(orderData: OrderData) {
-    try {
-      const { data } = await this.axios.post<any, AxiosResponse<any, any>, any>(
-        '/create-checkout-session/',
-        orderData
-      )
-      return data
-    } catch (error: any) {
-      const errorMessage = repositoryErrorHandler(error)
-      Swal.fire({
-        icon: 'error',
-        title: errorMessage.message
-      })
-    }
+    return await this.axios.post<any, AxiosResponse<any, any>, any>(
+      '/create-checkout-session/',
+      orderData
+    )
   }
   async checkoutSuccess(orderId: number) {
-    return await this.axios.post<any, AxiosResponse<any, any>, any>('/checkout-success/', {
+    return await this.axios.put<any, AxiosResponse<any, any>, any>('/edit-order/', {
       order_id: orderId
+    })
+  }
+  async refreshToken(refreshToken: string) {
+    console.log(refreshToken)
+    return await this.axios.post<any, AxiosResponse<any, any>, any>('/refresh-token/', {
+      refresh_token: refreshToken
     })
   }
   async checkoutCancel(orderId: number) {

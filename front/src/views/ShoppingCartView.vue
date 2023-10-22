@@ -7,6 +7,7 @@ import { stripeRepository } from '@/helpers/api'
 
 import { useAuthStore } from '@/stores/auth'
 import HrComponent from '@/components/HrComponent.vue'
+import router from '@/router'
 
 const authStore = useAuthStore()
 const cartStore = useCartStore()
@@ -20,13 +21,33 @@ const getTotalPrice = (price: number, selectedQuantity: number) => {
 const redirectToStripe = async () => {
   const orderData = {
     cart: cartStore.getCart,
-    token: authStore.getToken,
+    accessToken: authStore.getAccessToken,
     total: cartStore.totalPrice
   }
 
-  const { url, order_id: orderId } = await stripeRepository.createCheckoutSession(toRaw(orderData))
-  cartStore.setWaitingPaymentOrderId(orderId)
-  window.location.href = url
+  console.log()
+  try {
+    const { data } = await stripeRepository.createCheckoutSession(orderData)
+    cartStore.setWaitingPaymentOrderId(data.order_id)
+    window.location.href = data.url
+  } catch (error: any) {
+    if (error.response.status === 401) {
+  
+      try {
+        const refreshResponse = await stripeRepository.refreshToken(authStore.getRefreshToken)
+
+        const newAccessToken = refreshResponse.data
+
+        authStore.setRefreshedTokens(newAccessToken.token)
+   
+        redirectToStripe()
+      } catch (refreshError) {
+        authStore.logout()
+        router.push({ name: 'login' })
+
+      }
+    }
+  }
 }
 </script>
 

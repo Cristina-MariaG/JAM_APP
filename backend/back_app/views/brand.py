@@ -11,8 +11,9 @@ logger = logging.getLogger("jam")
 
 
 class BrandCollection(APIView):
-    @HandleError.handle_error("Jam collection get -")
+    @HandleError.handle_error("Jam BrandCollection get -")
     def get(self, request, *args, **kwargs):
+        logger.debug("Start BrandCollection get")
         response = dict()
 
         brand_list = Brand.objects.all()
@@ -20,4 +21,5 @@ class BrandCollection(APIView):
 
         response["brand_list"] = serializer.data
 
+        logger.debug("End BrandCollection get")
         return Response(response)

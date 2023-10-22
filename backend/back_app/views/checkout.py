@@ -15,24 +15,25 @@ from back_app.models import Order
 
 logger = logging.getLogger("jam")
 
-domain_url = "http://localhost:8000/"
+domain_url = settings.DOMAIN_URL
 
 
 class CheckoutCollection(APIView):
-    @HandleError.handle_error("Jam collection get -")
+    @HandleError.handle_error("Jam CheckoutCollection post -")
     def post(self, request, *args, **kwargs):
-        data = request.data
-        logger.error(request.data)
+        logger.debug("Start CheckoutCollection post ")
 
+        data = request.data
         line_items = []
 
-        user_id = decode_token(data["token"])
+        user_id = decode_token(data["accessToken"])
+
         if not user_id:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
         order_id = create_order(request.data, user_id)
 
-        for el in data["cart"]:
+        for el in list(data["cart"]):
             line_items.append(
                 {
                     "price_data": {
@@ -56,36 +57,48 @@ class CheckoutCollection(APIView):
             mode="payment",
             line_items=line_items,
         )
-        logger.error(checkout_session)
+        logger.debug("End CheckoutCollection post ")
         return Response({"url": checkout_session["url"], "order_id": order_id})
 
 
 class CheckoutSuccess(APIView):
-    @HandleError.handle_error("Jam CheckoutSuccess get -")
-    def post(self, request, *args, **kwargs):
-        logger.error(request.data)
+    @HandleError.handle_error("Jam CheckoutSuccess put -")
+    def put(self, request, *args, **kwargs):
+        logger.debug("Start Jam CheckoutSuccess put ")
+
         order_id = request.data.get("order_id")
-        if not order_id or order_id == -1:
+
+        if order_id is None or order_id == -1:
+            return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+
+        try:
+            order = Order.objects.get(id=order_id)
+        except Order.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        order = Order.objects.get(id=order_id)
         order.status = "PAYMENT_OK"
         order.save()
+
+        logger.debug("End Jam CheckoutSuccess put ")
         return Response({"status": "ok"})
 
 
 class CheckoutCancel(APIView):
-    @HandleError.handle_error("Jam CheckoutSuccess get -")
+    @HandleError.handle_error("Jam CheckoutCancel delete -")
     def delete(self, request, *args, **kwargs):
-        logger.error(request.data)
-        order_id = kwargs.get("id")
+        logger.debug("Start Jam CheckoutCancel delete ")
 
-        order = Order.objects.get(id=order_id)
-        if not order_id or order_id == -1 or not order:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        else:
+        order_id = kwargs.get("id", None)
+
+        try:
+            order = Order.objects.get(id=order_id)
             order.delete()
+        except Order.DoesNotExist:
+            return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+        except ValueError:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
+        logger.debug("End Jam CheckoutCancel delete ")
         return Response({"status": "ok"})
 
 
@@ -124,15 +137,9 @@ def decode_token(token):
             token,
             settings.SECRET_KEY,
             algorithms=["HS256"],
-            options={"verify_exp": True},
+            # options={"verify_exp": True},
         )
-        logger.error(decoded_access_token)
-
         user_id = decoded_access_token["user_id"]
-        logger.error(decoded_access_token)
-        # exp_timestamp = decoded_access_token["exp"]
-
-        # current_timestamp = datetime.timestamp(datetime.now())
 
         if not user_id:
             return False

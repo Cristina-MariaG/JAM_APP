@@ -29,11 +29,10 @@ const userAuthenticated = computed(() => authStore.isAuth)
 
 const logoutUser = () => {
   authStore.logout()
-  cartStore.resetStore()
+  // cartStore.resetStore()
 }
 
 const searchJam = () => {
-  console.log(authStore.token)
   if (route.name != 'home') {
     router.push(`/search/${searchedValue.value}`)
   } else {

@@ -1,36 +1,26 @@
-FROM ubuntu:18.04
+# Utiliser une image de base Python
+FROM python:3.10
 
-# PYTHON 3
-RUN apt-get update -y
-RUN apt-get upgrade -y
-RUN apt-get install build-essential -y
-RUN apt install -y python3.7
-RUN apt-get update -y
-RUN apt-get install -y libpython3.7-dev python-numpy
+# Définir le répertoire de travail
+WORKDIR /back
 
-# FOR MYSQL
-RUN apt-get update -y && apt-get upgrade -y
-RUN apt-get install -y default-libmysqlclient-dev build-essential
-RUN apt-get install -y libssl-dev
-RUN apt-get install -y wget
+# Copier le fichier requirements.txt et installer les dépendances
+COPY ./requirements.txt /back/requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# PIP
-RUN apt-get install -y python3-pip
-RUN python3.7 -m pip install --upgrade pip
+# Copier le reste du code source de l'application
+COPY . /back
 
-# LIBRARIES
-RUN pip3 install django==3.2.9
-RUN pip3 install djangorestframework==3.12.4
-RUN pip3 install django-filter==21.1
-RUN pip3 install python-arango==7.2.0
-RUN pip3 install pandas==1.3.5
-RUN pip3 install mysqlclient==2.0.3
-RUN pip3 install mysql-connector-python==8.0.33
-RUN pip3 install pyyaml==6.0
-RUN pip3 install django-cors-headers==3.10.0
-RUN pip3 install djangorestframework-simplejwt==5.3.0
-RUN pip3 install stripe==5.5.0
+# Exposer le port sur lequel fonctionne l'application
+EXPOSE 8213
 
+# Copy requirements.txt and install dependencies
+COPY requirements.txt /tmp/requirements.txt
 
+RUN python3.10 -m pip install --upgrade pip && python3.10 -m pip install -r /tmp/requirements.txt
 
+# Clean up
+# RUN rm get-pip.py
 
+# Set the default command to bash
+CMD ["bash"]

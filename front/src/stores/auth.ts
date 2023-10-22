@@ -4,21 +4,26 @@ import { defineStore } from 'pinia'
 
 interface UserStoreState {
   email: string
-  token: string
+  accessToken: string
+  refreshToken: string
 }
 
 export const useAuthStore = defineStore('auth', {
   state: (): UserStoreState => ({
-    token: '',
+    accessToken: '',
+    refreshToken: '',
     email: ''
   }),
 
   getters: {
     isAuth(state) {
-      return state.token !== ''
+      return state.accessToken !== ''
     },
-    getToken(state) {
-      return state.token
+    getAccessToken(state) {
+      return state.accessToken
+    },
+    getRefreshToken(state) {
+      return state.refreshToken
     },
     getEmail(state) {
       console.log(state.email)
@@ -33,7 +38,16 @@ export const useAuthStore = defineStore('auth', {
           token,
           user: { email }
         } = await authRepository.login(payload)
-        this.$patch({ email, token })
+        this.$patch({ email, accessToken: token.access_token, refreshToken: token.refresh_token })
+        return true
+      } catch (err) {
+        return false
+      }
+    },
+    async setRefreshedTokens(token: any) {
+      try {
+        console.log(token)
+        this.$patch({ accessToken: token.access_token, refreshToken: token.refresh_token })
         return true
       } catch (err) {
         return false

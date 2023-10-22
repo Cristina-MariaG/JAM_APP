@@ -15,8 +15,9 @@ products_per_page = 15
 
 
 class ProductsCollection(APIView):
-    @HandleError.handle_error("Jam collection get -")
+    @HandleError.handle_error("Jam ProductsCollection get -")
     def get(self, request, *args, **kwargs):
+        logger.debug("Start get ProductsCollection")
         response = dict()
 
         # with the newt 2 lines we can get all the informations for all the products
@@ -44,20 +45,17 @@ class ProductsCollection(APIView):
         response["products"] = serializer.data
         response["pages_number"] = total_pages
 
+        logger.debug("End ProductsCollection get")
         return Response(response)
 
 
 class ProductDetailsCollection(APIView):
-    @HandleError.handle_error("Jam collection get -")
+    @HandleError.handle_error("Jam ProductDetailsCollection get -")
     def get(self, request, *args, **kwargs):
+        logger.debug("Start ProductDetailsCollection get")
         response = dict()
         product_id = kwargs.get("id")
 
-        # product = Product.objects.prefetch_related(
-        #     "productingredient_set__ingredient"
-        # ).get(id=product_id)
-
-        # serializer = ProductSerializer(product)
         product = (
             Product.objects.select_related(
                 "flavor", "type_contenant", "brand", "stock_disponible", "category"
@@ -69,4 +67,6 @@ class ProductDetailsCollection(APIView):
         serialized_product = ProductSerializer(product)
 
         response["product"] = serialized_product.data
+
+        logger.debug("End ProductDetailsCollection get")
         return Response(response)

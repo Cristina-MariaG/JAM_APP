@@ -23,3 +23,28 @@ The following urls will be available:
 
 - front : http://localhost:8000/
 - back : http://localhost:8213/
+
+
+## Running the tests in dev mode
+Run the tests directly inside the dev containers
+
+Run all the tests  :
+- run the container for the back :
+ docker exec -it jam-back bash
+
+
+  python3.7 backend/manage.py test backend/back_app/tests -v 2 
+ docker exec -it jam-back bin/bash python3.7 back/back_app/manage.py test back_app/tests -v 2 
+
+-inside the container run :
+python3.10 manage.py test back_app/tests -v 2
+
+Run a single test inside a class test
+ - python3.10 manage.py test back_app/tests -k <test_name_match_inside_class_test>
+ - python3.10 manage.py test back_app/tests -k <test_name_file_without_extension>
+
+ - python3.10 manage.py test back_app/tests -k test_refresh_token (file)
+ - python3.10 manage.py test back_app/tests -k test_refresh_token_generate (test name inside test_refresh_token)
+
+ 
+docker compose exec jam-back python manage.py test

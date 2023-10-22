@@ -18,17 +18,27 @@ const page = ref<number>(1)
 const pagesNumber = ref<number>(1)
 
 onBeforeMount(async () => {
+  getData()
+})
+
+const getData = async () => {
   const { products: fetchedProducts, pages_number } = await productRepository.getAllProducts()
 
   products.value = fetchedProducts
   pagesNumber.value = pages_number
+}
+
+watch(page, async (val) => {
+  const { products: fetchedProducts } = await productRepository.getAllProducts(val)
+
+  products.value = fetchedProducts
 })
 
 watch(searchVal, (val) => {
   filtersState.setSearchedText(val)
 })
 
-watch(filtersState.state, async (newVal) => {
+watch(filtersState.state, async () => {
   getDataFilered()
 })
 
@@ -38,7 +48,6 @@ const getDataFilered = async () => {
   products.value = fetchedProducts
   pagesNumber.value = pages_number
 }
-const trad = ref(t('home.home'))
 </script>
 
 <template>
@@ -46,7 +55,6 @@ const trad = ref(t('home.home'))
     <div class="ma-5 pa-5">
       <v-row>
         <v-col cols="3"> <FilterProductsComponent /></v-col>
-        {{ trad }}
         <v-col cols="8">
           <div v-if="products.length != 0">
             <v-row>

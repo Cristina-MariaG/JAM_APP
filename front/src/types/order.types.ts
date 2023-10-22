@@ -1,7 +1,7 @@
 import type { ProductCart } from './cart.types'
 
 export interface OrderData {
-  token: string
+  accessToken: string
   cart: ProductCart[]
   total: number
 }

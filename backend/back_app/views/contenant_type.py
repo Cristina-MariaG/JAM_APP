@@ -13,6 +13,8 @@ logger = logging.getLogger("jam")
 class ContenantTypeCollection(APIView):
     @HandleError.handle_error("Jam ContenantTypeCollection get -")
     def get(self, request, *args, **kwargs):
+        logger.debug("Start ContenantTypeCollection get")
+
         response = dict()
 
         contenant_types = TypeContenant.objects.all()
@@ -20,4 +22,5 @@ class ContenantTypeCollection(APIView):
 
         response["contenant_types"] = serializer.data
 
+        logger.debug("End ContenantTypeCollection get")
         return Response(response)

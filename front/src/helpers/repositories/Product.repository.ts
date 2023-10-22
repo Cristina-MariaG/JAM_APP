@@ -5,10 +5,11 @@ import type { Product } from '@/types/product.types'
 export class ProductRepository {
   constructor(private axios: Axios) {}
 
-  async getAllProducts() {
+  async getAllProducts(page = 0) {
     try {
       const { data } = await this.axios.get<{ products: Product[]; pages_number: number }>(
-        '/product/'
+        '/product/',
+        { params: { page } }
       )
       return data
     } catch (error) {

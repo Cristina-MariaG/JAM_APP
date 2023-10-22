@@ -22,7 +22,7 @@ services:
     tty: true
     networks:
       jam_network:
-    entrypoint: /front/entrypoint_front.sh
+    entrypoint: sh /front/entrypoint_front.sh
 
   ### BACKEND ###
   jam-back:

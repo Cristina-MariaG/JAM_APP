@@ -3,7 +3,6 @@ import useFilters from '@/composables/filters'
 import { ref, onMounted, watch } from 'vue'
 
 const orderedType = ref(['Ascending', 'Descending'])
-// const showOrderBy = ref(false)
 const selectedOrder = ref('Select')
 const storeFilters = useFilters()
 

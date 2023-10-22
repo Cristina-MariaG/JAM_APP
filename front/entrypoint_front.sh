@@ -1,15 +1,7 @@
 #!/bin/bash
 cd /front
 
-#A executer en cas d'erreur au lancement
-#npm install -g n
-#n latest
-#npm install -g npm
-#hash -d npm
-#npm i 
-
 if [ "${VUE_APP_ENV}" != "local" ]; then
-
   echo "Environnement : Production"
   npm install
   npm run build
@@ -21,7 +13,6 @@ else
   npm run dev 
   tail -f /dev/null
   
-  # CMD ["nodemon", "--exec", "npm", "run", "docker-start"]
-fi
+  fi
 
 exec "$@"

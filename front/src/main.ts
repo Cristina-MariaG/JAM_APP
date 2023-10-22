@@ -16,13 +16,6 @@ import * as directives from 'vuetify/directives'
 import App from './App.vue'
 import router from './router'
 
-// const app = createApp(App, {
-//   setup() {
-//     const { t } = VueI18n.useI18n() // call `useI18n`, and spread `t` from  `useI18n` returning
-//     return { t } // return render context that included `t`
-//   }
-// })
-
 const app = createApp(App)
 
 const pinia = createPinia()

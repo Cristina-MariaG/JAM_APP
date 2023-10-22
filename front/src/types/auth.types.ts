@@ -4,8 +4,13 @@ export interface AuthForm {
 }
 
 export interface LoginData {
-  token: string
+  token: Token
   user: {
     email: string
   }
+}
+
+export interface Token {
+  access_token: string
+  refresh_token: string
 }
