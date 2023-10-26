@@ -32,7 +32,6 @@ const addToCart = () => {
 }
 
 const redirectToProductDetails = () => {
-
   router.push(`/product-details/${product.id}`)
 }
 </script>
@@ -45,12 +44,23 @@ const redirectToProductDetails = () => {
 
     <v-card-title class="ms-5"> {{ product.price }} €</v-card-title>
     <v-card-actions>
-      <v-btn v-if="alreadyInCart" @click="addToCart">Modifier</v-btn>
-      <v-btn v-else @click="addToCart">Ajouter</v-btn>
-      <v-select v-model="selectedQuantity" :items="quantityOptions" label="Qty"></v-select>
+      <div class="d-flex justify-space-between align-center" style="width: 100%">
+        <v-btn v-if="alreadyInCart" @click="addToCart">{{ $t('home.modify') }}</v-btn>
+        <v-btn v-else @click="addToCart">{{ $t('home.add') }}</v-btn>
+        <v-select
+          style="width: 40%"
+          v-model="selectedQuantity"
+          :items="quantityOptions"
+          :label="$t('home.quantity')"
+        ></v-select>
+      </div>
     </v-card-actions>
-    <v-btn @click="redirectToProductDetails" id="product-detail">
-      See details...</v-btn
-    >
+    <v-btn @click="redirectToProductDetails" id="product-detail"> {{ $t('home.details') }}</v-btn>
   </v-card>
 </template>
+
+<style scoped>
+.v-input {
+  display: block;
+}
+</style>

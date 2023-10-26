@@ -1,10 +1,16 @@
 {
   "language": "French",
   "header": {
+    "appName": "JAM Shop",
     "language": "Language"
   },
   "home": {
-    "home": "Home"
+    "home": "Home",
+    "modify": "Modify",
+    "add": "Add",
+    "details": "See details...",
+    "quantity": "qty",
+    "logoutUser": "Logout"
   },
   "login": {
     "login": "Login",
@@ -12,7 +18,8 @@
     "password": "Password",
     "fillInput": "Please fill in all fields.",
     "noAccountYet": "No account yet?",
-    "inscription": "Sign up"
+    "inscription": "Sign up",
+    "alreadyAccount": "Already have an account?"
   },
   "filters": {
     "priceBetween": "Price between ",
@@ -22,7 +29,21 @@
     "brand": "Brand",
     "onlyAvailableStock": "Only available stock",
     "orderByPrice": "Order by price",
-    "select": "Select"
+    "select": "Select",
+    "searchJam": "Search Jam"
+  },
+  "cart": {
+    "cart": "Cart",
+    "products": "products",
+    "synthese": "Summary",
+    "total": "Total",
+    "notConnected": "You must be logged in to place an order",
+    "validateCart": "Validate Cart",
+    "image": "Image",
+    "name": "Name",
+    "price": "Price",
+    "quantity": "Quantity",
+    "totalPrice": "Total Price"
   },
   "checkout": {
     "cancel": "Cancellation of ongoing payment.... You will be redirected...",

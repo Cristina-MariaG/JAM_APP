@@ -16,7 +16,7 @@ onBeforeMount(async () => {
       cartStore.resetOrderId()
       setTimeout(() => {
         router.push({ name: 'home' })
-      }, 3000)
+      }, 1000)
     })
     .catch((err) => {
       Swal.fire({

@@ -6,13 +6,15 @@ interface UserStoreState {
   email: string
   accessToken: string
   refreshToken: string
+  role: string
 }
 
 export const useAuthStore = defineStore('auth', {
   state: (): UserStoreState => ({
     accessToken: '',
     refreshToken: '',
-    email: ''
+    email: '',
+    role: ''
   }),
 
   getters: {
@@ -26,8 +28,10 @@ export const useAuthStore = defineStore('auth', {
       return state.refreshToken
     },
     getEmail(state) {
-      console.log(state.email)
       return state.email
+    },
+    isAdmin(state) {
+      return state.role === 'admin'
     }
   },
 
@@ -36,9 +40,15 @@ export const useAuthStore = defineStore('auth', {
       try {
         const {
           token,
-          user: { email }
+          user: { email, role }
         } = await authRepository.login(payload)
-        this.$patch({ email, accessToken: token.access_token, refreshToken: token.refresh_token })
+        console.log(role)
+        this.$patch({
+          role,
+          email,
+          accessToken: token.access_token,
+          refreshToken: token.refresh_token
+        })
         return true
       } catch (err) {
         return false

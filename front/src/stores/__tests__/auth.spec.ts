@@ -9,7 +9,7 @@ vi.mock('@/helpers/api', () => ({
     inscription: vi.fn()
   }
 }))
-let authStore;
+let authStore: any
 
 describe('Auth Store', () => {
   beforeEach(() => {

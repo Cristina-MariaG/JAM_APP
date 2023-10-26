@@ -40,7 +40,7 @@ const handleSubmit = async () => {
       } else {
         Swal.fire({
           icon: 'error',
-          title: 'Bad credentials'
+          title: t('error.badCredentials')
         })
       }
     }
@@ -48,7 +48,6 @@ const handleSubmit = async () => {
     Swal.fire({
       icon: 'error',
       title: t('error.password')
-      // title: 'Incorrect password'
     })
   }
 }
@@ -57,8 +56,43 @@ const handleSubmit = async () => {
 <template>
   <div style="width: 50%" class="mx-auto login">
     <h1 class="text-center">Inscription</h1>
-    <v-form v-model="validForm" @submit.prevent="handleSubmit">
+    <v-form
+      v-model="validForm"
+      color="primary"
+      class="map-right-menu-source-card__source-to-district-form mt-2"
+    >
       <v-text-field
+        v-model="form.email"
+        :label="$t('login.email')"
+        :rules="validationRules.emailRule"
+      ></v-text-field>
+      <v-text-field
+        v-model="form.password"
+        :label="$t('login.password')"
+        type="password"
+        :rules="validationRules.passwordRule"
+      ></v-text-field>
+      <v-text-field
+        v-model="password2"
+        type="password"
+        :label="$t('login.password')"
+        :rules="validationRules.passwordRule"
+      ></v-text-field>
+      <v-alert class="my-5" v-if="showEmptyFieldError" type="error">
+        {{ $t('login.fillInput') }}
+      </v-alert>
+      <v-btn
+        type="submit"
+        block
+        class="text-none mb-4"
+        :disabled="!validForm"
+        color="indigo-darken-3"
+        size="x-large"
+        @click.prevent="handleSubmit"
+        variant="flat"
+        >{{ $t('login.inscription') }}</v-btn
+      >
+      <!-- <v-text-field
         v-model="form.email"
         label="Email"
         :rules="validationRules.emailRule"
@@ -85,11 +119,11 @@ const handleSubmit = async () => {
         :disabled="!validForm"
         variant="flat"
         >Inscription</v-btn
-      >
+      > -->
     </v-form>
     <p class="text-center">
-      Vous avez deja un compte ?
-      <RouterLink to="/login">Login</RouterLink>
+      {{ $t('login.alreadyAccount') }}
+      <RouterLink to="/login">{{ $t('login.login') }}</RouterLink>
     </p>
   </div>
 </template>

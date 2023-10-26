@@ -7,6 +7,7 @@ export interface LoginData {
   token: Token
   user: {
     email: string
+    role: string
   }
 }
 

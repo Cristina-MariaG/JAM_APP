@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import JamCard from '@/components/JamCard.vue'
+import NoDataFound from '@/components/NoDataFound.vue'
+import FilterProductsComponent from '@/components/FilterProductsComponent.vue'
+
 import { ref, onBeforeMount, watch } from 'vue'
+import { filteringDataRepository } from '@/helpers/api'
 import { productRepository } from '@/helpers/api'
 import type { Product } from '@/types/product.types'
-import FilterProductsComponent from '@/components/FilterProductsComponent.vue'
 import useFilters from '@/composables/filters'
-import { filteringDataRepository } from '@/helpers/api'
-import NoDataFound from '@/components/NoDataFound.vue'
-// import { useI18n } from 'vue-i18n'
 
 const products = ref<Product[]>([])
 const filtersState = useFilters()

@@ -1,5 +1,4 @@
-import type { FiltersStoreState, PriceRange } from '@/types/filters.types'
-import type { Product } from '@/types/product.types'
+import type { FiltersStoreState } from '@/types/filters.types'
 import { reactive } from 'vue'
 
 const state = reactive<FiltersStoreState>({

@@ -25,7 +25,6 @@ class UserCollection(APIView):
         validated_data = user_serializer.validated_data
 
         try:
-            
             user = User.objects.get(email=validated_data["email"])
         except User.DoesNotExist:
             return Response(
@@ -44,7 +43,7 @@ class UserCollection(APIView):
                 "refresh_token": str(refresh),
                 "access_token": str(refresh.access_token),
             },
-            "user": {"email": user.email},
+            "user": {"email": user.email, "role": user.role.role},
         }
 
         return Response(response_data, status=status.HTTP_200_OK)

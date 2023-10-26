@@ -3,7 +3,6 @@ import { reactive, ref, toRaw } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
 import { useValidationRules } from '@/composables/validateForm'
-import ButtonComponent from '@/components/common/ButtonComponent.vue'
 import Swal from 'sweetalert2'
 import { useI18n } from 'vue-i18n'
 
@@ -68,12 +67,13 @@ const handleSubmit = async () => {
         type="submit"
         block
         class="text-none mb-4"
+        id="submit"
         :disabled="!validForm"
         color="indigo-darken-3"
         size="x-large"
         @click.prevent="handleSubmit"
         variant="flat"
-        >Login</v-btn
+        >{{ $t('login.login') }}</v-btn
       >
     </v-form>
     <div>
@@ -90,6 +90,6 @@ const handleSubmit = async () => {
   margin-top: 10rem;
 }
 .routerLink {
-  color: var(--vt-c-black)
+  color: var(--vt-c-black);
 }
 </style>

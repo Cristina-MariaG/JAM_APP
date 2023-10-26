@@ -1,9 +1,9 @@
 import { useCartStore } from '../cart'
-import { expect, describe, it, vi, beforeEach } from 'vitest'
+import { expect, describe, it, beforeEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 
 describe('useCartStore', () => {
-  let cartStore
+  let cartStore: any
 
   beforeEach(() => {
     setActivePinia(createPinia())

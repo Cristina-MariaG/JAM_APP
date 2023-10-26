@@ -1,10 +1,17 @@
 {
   "language": "fr",
   "header": {
+    "appName": "JAM Shop",
     "language": "langue"
   },
   "home": {
-    "home": "Accueil"
+    "home": "Accueil",
+    "modify": "Modifier",
+    "add": "Ajouter",
+    "details": "See details...",
+    "quantity": "qty",
+    "logoutUser": "Deconnexion",
+    "dashboard": "Tableau de board"
   },
   "login": {
     "login": "Connexion",
@@ -12,7 +19,8 @@
     "password": "Mot de passe",
     "fillInput": "Veuillez remplir tous les champs.",
     "noAccountYet": "Pas de compte ?",
-    "inscription": "Inscription"
+    "inscription": "Inscription",
+    "alreadyAccount": "Vous avez deja un compte ?"
   },
   "filters": {
     "priceBetween": "Price entre ",
@@ -22,7 +30,22 @@
     "brand": "Marque",
     "onlyAvailableStock": "Only available stock",
     "orderByPrice": "Order by price",
-    "select": "Selectionner"
+    "select": "Selectionner",
+    "searchJam": "Search Jam"
+  },
+  "cart": {
+    "cart": "Panier",
+    "products": "products",
+    "synthese": "Synthèse",
+    "total": "Total",
+    "notConnected": "Vous devez être connecté pour pouvoir commander",
+    "validateCart": "Valider le panier",
+    "image": "Image",
+    "name": "Nom",
+    "price": "Prix",
+    "quantity": "Quantité",
+    "totalPrice": "Prix total",
+    "empty": "Le panier est vide"
   },
   "checkout": {
     "cancel": "  Annulation du payement en cours.... Vous allez etre redirigé ...",
@@ -47,5 +70,6 @@
     "onPromotion": "En promotion :",
     "yesPromotion": "oui",
     "noPromotion": "non"
-  }
+  },
+  "noDataFound": "Aucune donnée trouvé"
 }
