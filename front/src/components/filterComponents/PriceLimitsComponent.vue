@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeMount, ref, watch } from 'vue'
+import { onBeforeMount, ref, watch } from 'vue'
 import useFilters from '@/composables/filters'
 import { productRepository } from '@/helpers/api'
 

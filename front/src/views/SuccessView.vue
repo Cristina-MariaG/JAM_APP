@@ -2,7 +2,7 @@
 import { stripeRepository } from '@/helpers/api'
 import { useCartStore } from '@/stores/cart'
 import Swal from 'sweetalert2'
-import { ref, onBeforeMount } from 'vue'
+import { onBeforeMount } from 'vue'
 
 import { useI18n } from 'vue-i18n'
 

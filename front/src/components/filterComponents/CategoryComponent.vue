@@ -34,18 +34,7 @@ onMounted(async () => {
     </div>
   </div>
 </template>
-<style lang="scss">
-.v-input--density-default {
-  --v-input-control-height: 0px;
-  --v-input-padding-top: 0px;
-}
-.v-selection-control.v-selection-control--density-default {
-  --v-selection-control-size: 25px;
-}
-.v-input__details {
-  min-height: auto;
-  padding: 0;
-}
+<style lang="scss" >
 
 .separator {
   width: 90%;

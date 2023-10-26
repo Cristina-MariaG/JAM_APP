@@ -4,17 +4,12 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
-import i18n from './plugins/i18n'
-// import VueI18n from 'vue-i18n'
+import { i18n } from './plugins/i18n'
 
-// Vuetify
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-
+import createVuetify from './plugins/vuetify'
 import App from './App.vue'
 import router from './router'
+import type { I18n } from 'vue-i18n'
 
 const app = createApp(App)
 
@@ -23,15 +18,11 @@ pinia.use(piniaPluginPersistedstate)
 
 app.use(pinia)
 
-const vuetify = createVuetify({
-  components,
-  directives
-})
+// const vuetify = createVuetify({})
 
 app.use(router)
-app.use(i18n)
-app.use(vuetify)
+app.use(i18n as I18n)
+app.use(createVuetify)
 
-// app.config.globalProperties.t = i18n.global.t
 
 app.mount('#app')

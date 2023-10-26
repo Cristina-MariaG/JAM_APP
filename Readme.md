@@ -28,6 +28,16 @@ The following urls will be available:
 ## Running the tests in dev mode
 Run the tests directly inside the dev containers
 
+Frontend :
+run in front/ folder:
+npm run test        (to run all the tests)
+npm run watch        (to run all the tests but keep alive to track changes)
+npm run coverage     (for coverage report)
+npm run test:unit fileName -- --watch       (to run a single test)
+
+
+Backend :
+
 Run all the tests  :
 - run the container for the back :
  docker exec -it jam-back bash

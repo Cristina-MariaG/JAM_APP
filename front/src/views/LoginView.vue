@@ -2,9 +2,12 @@
 import { reactive, ref, toRaw } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
-import Swal from 'sweetalert2'
 import { useValidationRules } from '@/composables/validateForm'
+import ButtonComponent from '@/components/common/ButtonComponent.vue'
+import Swal from 'sweetalert2'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const validationRules = useValidationRules()
 const authStore = useAuthStore()
 const router = useRouter()
@@ -32,7 +35,7 @@ const handleSubmit = async () => {
     } else {
       Swal.fire({
         icon: 'error',
-        title: 'Bad credentials'
+        title: t('error.badCredentials')
       })
     }
   }
@@ -41,7 +44,7 @@ const handleSubmit = async () => {
 
 <template>
   <div style="width: 50%" class="mx-auto login">
-    <h1 class="text-center">Login</h1>
+    <h1 class="text-center">{{ $t('login.login') }}</h1>
     <v-form
       v-model="validForm"
       color="primary"
@@ -49,17 +52,17 @@ const handleSubmit = async () => {
     >
       <v-text-field
         v-model="form.email"
-        label="Email"
+        :label="$t('login.email')"
         :rules="validationRules.emailRule"
       ></v-text-field>
       <v-text-field
         v-model="form.password"
-        label="Password"
+        :label="$t('login.password')"
         type="password"
         :rules="validationRules.passwordRule"
       ></v-text-field>
       <v-alert class="my-5" v-if="showEmptyFieldError" type="error">
-        Veuillez remplir tous les champs.
+        {{ $t('login.fillInput') }}
       </v-alert>
       <v-btn
         type="submit"
@@ -73,15 +76,20 @@ const handleSubmit = async () => {
         >Login</v-btn
       >
     </v-form>
-    <p class="text-center">
-      Pas de compte ?
-      <RouterLink to="/inscription">Inscription</RouterLink>
-    </p>
+    <div>
+      <p class="text-center">
+        {{ $t('login.noAccountYet') }}
+        <RouterLink class="routerLink" to="/inscription">{{ $t('login.inscription') }}</RouterLink>
+      </p>
+    </div>
   </div>
 </template>
 
 <style>
 .login {
   margin-top: 10rem;
+}
+.routerLink {
+  color: var(--vt-c-black)
 }
 </style>

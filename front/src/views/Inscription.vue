@@ -5,9 +5,9 @@ import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
 import { useValidationRules } from '@/composables/validateForm'
 import Swal from 'sweetalert2'
-// import { useI18n } from 'vue-i18n'
+import { useI18n } from 'vue-i18n'
 
-// const { t } = useI18n()
+const { t } = useI18n()
 
 const validationRules = useValidationRules()
 const authStore = useAuthStore()
@@ -47,8 +47,8 @@ const handleSubmit = async () => {
   } else {
     Swal.fire({
       icon: 'error',
-      // title: t('error.genericError')
-      title: 'Incorrect password'
+      title: t('error.password')
+      // title: 'Incorrect password'
     })
   }
 }

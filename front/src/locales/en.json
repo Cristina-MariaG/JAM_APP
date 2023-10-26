@@ -1,7 +1,51 @@
 {
-  "login": "Bienvenido",
-  "language": "es",
+  "language": "French",
   "header": {
-    "language": "lang"
+    "language": "Language"
+  },
+  "home": {
+    "home": "Home"
+  },
+  "login": {
+    "login": "Login",
+    "email": "Email",
+    "password": "Password",
+    "fillInput": "Please fill in all fields.",
+    "noAccountYet": "No account yet?",
+    "inscription": "Sign up"
+  },
+  "filters": {
+    "priceBetween": "Price between ",
+    "category": "Category",
+    "contenantType": "Container type",
+    "stockDisponible": "Stock available",
+    "brand": "Brand",
+    "onlyAvailableStock": "Only available stock",
+    "orderByPrice": "Order by price",
+    "select": "Select"
+  },
+  "checkout": {
+    "cancel": "Cancellation of ongoing payment.... You will be redirected...",
+    "success": "Your order has been successfully recorded!"
+  },
+  "error": {
+    "badCredentials": "Incorrect login data",
+    "genericError": "A generic error has occurred..."
+  },
+  "product": {
+    "detailsTitle": "Product Details",
+    "category": "Category:",
+    "brand": "Brand:",
+    "description": "Description:",
+    "price": "Price:",
+    "flavor": "Flavor:",
+    "containerType": "Container Type:",
+    "stockAvailable": "Stock available:",
+    "yes": "Yes",
+    "no": "No",
+    "ingredients": "Ingredients",
+    "onPromotion": "On promotion:",
+    "yesPromotion": "yes",
+    "noPromotion": "no"
   }
 }

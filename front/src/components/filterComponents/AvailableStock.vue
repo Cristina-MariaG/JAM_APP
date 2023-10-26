@@ -11,14 +11,13 @@ watch(availableStock, (newVal) => {
 </script>
 
 <template>
-  <div>
+  <div class="mb-5">
     <p class="filtersText">{{ $t('filters.stockDisponible') }}</p>
     <v-switch
       v-model="availableStock"
       hide-details
       inset
-      :label="`Only available stock`"
+      :label="$t('filters.onlyAvailableStock')"
     ></v-switch>
   </div>
 </template>
-<style lang="scss" scoped></style>

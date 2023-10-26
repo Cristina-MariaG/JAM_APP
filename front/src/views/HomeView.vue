@@ -6,10 +6,8 @@ import type { Product } from '@/types/product.types'
 import FilterProductsComponent from '@/components/FilterProductsComponent.vue'
 import useFilters from '@/composables/filters'
 import { filteringDataRepository } from '@/helpers/api'
-import NoDataDisponible from '@/components/NoDataDisponible.vue'
-import { useI18n } from 'vue-i18n'
-
-const { t } = useI18n()
+import NoDataFound from '@/components/NoDataFound.vue'
+// import { useI18n } from 'vue-i18n'
 
 const products = ref<Product[]>([])
 const filtersState = useFilters()
@@ -64,7 +62,7 @@ const getDataFilered = async () => {
             </v-row>
             <v-pagination v-model="page" :length="pagesNumber" rounded="circle"></v-pagination>
           </div>
-          <NoDataDisponible v-else />
+          <NoDataFound v-else />
         </v-col>
       </v-row>
     </div>

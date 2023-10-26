@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { ref, onBeforeMount, onMounted, watch } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import type { Product } from '@/types/product.types'
 import { filteringDataRepository } from '@/helpers/api'
 import JamCard from '@/components/JamCard.vue'
-import router from '@/router'
-import NoDataDisponible from '@/components/NoDataDisponible.vue'
+import NoDataFound from '@/components/NoDataFound.vue'
 
 const props = defineProps<{
   searched: string
@@ -45,7 +44,7 @@ watch(
       <v-pagination v-model="page" :length="pagesNumber" rounded="circle"></v-pagination>
     </div>
 
-    <NoDataDisponible v-else />
+    <NoDataFound v-else />
   </div>
 </template>
 <style>

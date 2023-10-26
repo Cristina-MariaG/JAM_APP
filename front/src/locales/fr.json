@@ -1,5 +1,4 @@
 {
-  "login": "Bienvenu",
   "language": "fr",
   "header": {
     "language": "langue"
@@ -7,12 +6,23 @@
   "home": {
     "home": "Accueil"
   },
+  "login": {
+    "login": "Connexion",
+    "email": "Email",
+    "password": "Mot de passe",
+    "fillInput": "Veuillez remplir tous les champs.",
+    "noAccountYet": "Pas de compte ?",
+    "inscription": "Inscription"
+  },
   "filters": {
     "priceBetween": "Price entre ",
     "category": "Categorie",
     "contenantType": "Type contenant",
     "stockDisponible": "Stock disponible",
-    "brand": "Marque"
+    "brand": "Marque",
+    "onlyAvailableStock": "Only available stock",
+    "orderByPrice": "Order by price",
+    "select": "Selectionner"
   },
   "checkout": {
     "cancel": "  Annulation du payement en cours.... Vous allez etre redirigé ...",

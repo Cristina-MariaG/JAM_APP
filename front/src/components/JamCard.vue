@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Product } from '@/types/product.types'
-import { ref, defineProps, reactive, toRaw, computed } from 'vue'
+import { ref, defineProps } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCartStore } from '@/stores/cart'
 
@@ -32,9 +32,8 @@ const addToCart = () => {
 }
 
 const redirectToProductDetails = () => {
-  const productId = product.id
 
-  router.push(`/product-details/${productId}`)
+  router.push(`/product-details/${product.id}`)
 }
 </script>
 
@@ -50,6 +49,8 @@ const redirectToProductDetails = () => {
       <v-btn v-else @click="addToCart">Ajouter</v-btn>
       <v-select v-model="selectedQuantity" :items="quantityOptions" label="Qty"></v-select>
     </v-card-actions>
-    <v-btn @click="redirectToProductDetails"> See details...</v-btn>
+    <v-btn @click="redirectToProductDetails" id="product-detail">
+      See details...</v-btn
+    >
   </v-card>
 </template>

@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import useFilters from '@/composables/filters'
-import { ref, onMounted, watch } from 'vue'
+import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const orderedType = ref(['Ascending', 'Descending'])
-const selectedOrder = ref('Select')
+const selectedOrder = ref(t('filters.select'))
 const storeFilters = useFilters()
 
 watch(selectedOrder, (val) => {
@@ -13,11 +16,18 @@ watch(selectedOrder, (val) => {
 
 <template>
   <div>
+    <p id="title">{{ $t('filters.orderByPrice') }}</p>
     <v-combobox
       v-model="selectedOrder"
       :items="orderedType"
-      label="Order by price"
       variant="solo-filled"
+      label=""
     ></v-combobox>
   </div>
 </template>
+<style lang="scss" scoped>
+.v-input--density-default {
+  --v-input-control-height: 15px;
+  --v-input-padding-top: 15px;
+}
+</style>

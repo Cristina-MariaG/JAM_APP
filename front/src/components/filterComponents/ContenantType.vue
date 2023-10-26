@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import useFilters from '@/composables/filters'
 import { contenantTypeRepository } from '@/helpers/api'
-import { ref, onMounted, watch, onBeforeMount } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 
 interface ContenantType {
   id: number

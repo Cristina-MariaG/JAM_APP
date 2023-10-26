@@ -14,10 +14,15 @@ const storeFilters = useFilters()
 watch(selectedBrands, (newVal) => {
   storeFilters.setbrandList(newVal)
 })
-onMounted(async () => {
+
+onMounted(() => {
+  getBrand()
+})
+
+const getBrand = async () => {
   const { brand_list: brandList } = await brandRepository.getBrands()
   apiBrandList.value = brandList
-})
+}
 </script>
 
 <template>
@@ -47,5 +52,8 @@ onMounted(async () => {
   width: 90%;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
+}
+.filtersText {
+  margin-bottom: 1em;
 }
 </style>
