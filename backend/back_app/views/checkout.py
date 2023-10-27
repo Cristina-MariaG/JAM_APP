@@ -26,7 +26,7 @@ class CheckoutCollection(APIView):
         data = request.data
         line_items = []
 
-        user_id = decode_token(data["accessToken"])
+        user_id = verify_validity_decode_token(data["accessToken"])
 
         if not user_id:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
@@ -131,13 +131,13 @@ def create_line_order_for_order_id(order_id, product):
     return False
 
 
-def decode_token(token):
+def verify_validity_decode_token(token):
     try:
         decoded_access_token = jwt.decode(
             token,
             settings.SECRET_KEY,
             algorithms=["HS256"],
-            # options={"verify_exp": True},
+            options={"verify_exp": True},
         )
         user_id = decoded_access_token["user_id"]
 

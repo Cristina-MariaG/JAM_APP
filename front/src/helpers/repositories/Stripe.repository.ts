@@ -17,7 +17,6 @@ export class StripeRepository {
     })
   }
   async refreshToken(refreshToken: string) {
-    console.log(refreshToken)
     return await this.axios.post<any, AxiosResponse<any, any>, any>('/refresh-token/', {
       refresh_token: refreshToken
     })

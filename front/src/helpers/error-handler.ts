@@ -12,7 +12,6 @@ export function repositoryErrorHandler(err: any) {
       message: 'Api Error'
     }
   } else if (err instanceof Error) {
-    console.error(err.message)
     return {
       message: 'Error'
     }

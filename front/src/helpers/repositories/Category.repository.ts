@@ -11,7 +11,6 @@ export class CategoryRepository {
       return data
     } catch (error) {
       const errorMessage = repositoryErrorHandler(error)
-      console.error('Recuperation failed:', errorMessage)
       throw errorMessage
     }
   }

@@ -9,6 +9,8 @@ from back_app.views import price
 from back_app.views import contenant_type
 from back_app.views import brand
 from back_app.views import refresh_token
+from back_app.views import flavor
+from back_app.views import ingredient
 
 urlpatterns = [
     path("create-checkout-session/", checkout.CheckoutCollection.as_view()),
@@ -24,4 +26,6 @@ urlpatterns = [
     path("prices-min-max/", price.PriceCollection.as_view()),
     path("refresh-token/", refresh_token.RefreshTokenData.as_view()),
     path("contenant-type/", contenant_type.ContenantTypeCollection.as_view()),
+    path("flavor/", flavor.FlavorCollection.as_view()),
+    path("ingredient/", ingredient.IngredientCollection.as_view()),
 ]

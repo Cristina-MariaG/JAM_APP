@@ -65,6 +65,13 @@ export const useCartStore = defineStore('cart', {
       return quantity
     },
 
+    removeFromCart(id: number) {
+      const index = this.cart.findIndex((product) => product.id === id)
+      if (index !== -1) {
+        this.cart.splice(index, 1)
+      }
+    },
+
     resetStore() {
       this.$reset()
     },

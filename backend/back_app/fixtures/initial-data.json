@@ -435,6 +435,24 @@
         }
     },
     {
+        "model": "back_app.productingredient",
+        "pk": 5,
+        "fields": {
+            "product": 3,
+            "ingredient": 2,
+            "quantity": 1.0
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 6,
+        "fields": {
+            "product": 4,
+            "ingredient": 2,
+            "quantity": 1.0
+        }
+    },
+    {
         "model": "back_app.product",
         "pk": 1,
         "fields": {

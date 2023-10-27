@@ -45,7 +45,8 @@
     "price": "Prix",
     "quantity": "Quantité",
     "totalPrice": "Prix total",
-    "empty": "Le panier est vide"
+    "empty": "Le panier est vide",
+    "removeQuestion": "Vous etes sur ?"
   },
   "checkout": {
     "cancel": "  Annulation du payement en cours.... Vous allez etre redirigé ...",

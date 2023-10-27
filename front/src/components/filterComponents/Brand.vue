@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import useFilters from '@/composables/filters'
 import { brandRepository } from '@/helpers/api'
+import type { Brand } from '@/types/product.types';
 import { ref, onMounted, watch } from 'vue'
 
-interface Brand {
-  id: number
-  brand: string
-}
 const apiBrandList = ref<Brand[]>([])
 const selectedBrands = ref([])
 const storeFilters = useFilters()

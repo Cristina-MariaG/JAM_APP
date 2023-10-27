@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import useFilters from '@/composables/filters'
 import { contenantTypeRepository } from '@/helpers/api'
+import type { TypeContenant } from '@/types/product.types';
 import { ref, onMounted, watch } from 'vue'
 
-interface ContenantType {
-  id: number
-  type_contenant: string
-}
-const apiContenantType = ref<ContenantType[]>([])
+
+const apiContenantType = ref<TypeContenant[]>([])
 const selectedContenantTypes = ref([])
 const storeFilters = useFilters()
 

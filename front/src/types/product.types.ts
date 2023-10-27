@@ -44,3 +44,5 @@ export interface StockDisponible {
   id: number
   stock_disponible: string
 }
+
+

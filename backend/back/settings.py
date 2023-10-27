@@ -40,6 +40,9 @@ BACK_PROTOCOL = os.getenv("BACK_PROTOCOL")
 BACK_HOST = os.getenv("BACK_HOST")
 BACK_PORT = os.getenv("BACK_PORT", 8213)
 
+
+PRODUCTS_PER_PAGE = 6
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -143,8 +146,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=1),
-    "REFRESH_TOKEN_LIFETIME": timedelta(minutes=5),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=120),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=5),
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
     "SLIDING_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": False,

@@ -24,12 +24,11 @@ const getData = async () => {
 
   products.value = fetchedProducts
   pagesNumber.value = pages_number
+  console.log(pagesNumber)
 }
 
 watch(page, async (val) => {
-  const { products: fetchedProducts } = await productRepository.getAllProducts(val)
-
-  products.value = fetchedProducts
+  getDataFilered(val - 1)
 })
 
 watch(searchVal, (val) => {
@@ -37,12 +36,12 @@ watch(searchVal, (val) => {
 })
 
 watch(filtersState.state, async () => {
-  getDataFilered()
+  getDataFilered(page.value - 1)
 })
 
-const getDataFilered = async () => {
+const getDataFilered = async (pageVal: number) => {
   const { products: fetchedProducts, pages_number } =
-    await filteringDataRepository.getProductsFiltered(filtersState.state)
+    await filteringDataRepository.getProductsFiltered(filtersState.state, pageVal)
   products.value = fetchedProducts
   pagesNumber.value = pages_number
 }

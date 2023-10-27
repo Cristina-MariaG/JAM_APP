@@ -12,17 +12,18 @@ from django.db.models import Q
 from back_app.models import Product, StockDisponible
 
 from back_app.views.serializers.product import ProductsSerializer
+from django.conf import settings
 
 logger = logging.getLogger("jam")
 
-products_per_page = 15
+products_per_page = settings.PRODUCTS_PER_PAGE
 
 
 class FilterCollection(APIView):
     @HandleError.handle_error("Jam FilterCollection get -")
     def get(self, request, *args, **kwargs):
         logger.debug("Start FilterCollection get ")
-        
+
         response = dict()
         min_price = request.GET.get("minPriceUser", None)
         max_price = request.GET.get("maxPriceUser", None)

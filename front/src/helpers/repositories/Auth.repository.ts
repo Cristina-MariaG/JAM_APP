@@ -23,7 +23,6 @@ export class AuthRepository {
     } catch (error) {
       // Handle errors using the repositoryErrorHandler or other error handling logic
       const errorMessage = repositoryErrorHandler(error)
-      console.error('inscription failed:', errorMessage)
       throw errorMessage // Optionally, re-throw the error to the caller
     }
   }

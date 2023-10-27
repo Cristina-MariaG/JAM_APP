@@ -7,7 +7,6 @@ import { useCartStore } from '@/stores/cart'
 const cartStore = useCartStore()
 const router = useRouter()
 
-const quantityOptions = ref([1, 2, 3, 4, 5])
 const getImage = (image: string) => {
   return `/uploads/${image}`
 }
@@ -42,20 +41,35 @@ const redirectToProductDetails = () => {
 
     <v-card-title class="ms-5"> {{ product.name }} </v-card-title>
 
-    <v-card-title class="ms-5"> {{ product.price }} €</v-card-title>
+    <v-card-title class="ms-5">Price:  {{ product.price }} €</v-card-title>
     <v-card-actions>
-      <div class="d-flex justify-space-between align-center" style="width: 100%">
-        <v-btn v-if="alreadyInCart" @click="addToCart">{{ $t('home.modify') }}</v-btn>
-        <v-btn v-else @click="addToCart">{{ $t('home.add') }}</v-btn>
-        <v-select
-          style="width: 40%"
-          v-model="selectedQuantity"
-          :items="quantityOptions"
-          :label="$t('home.quantity')"
-        ></v-select>
+      <div class="d-flex flex-wrap">
+        <v-btn style="width: 50%" v-if="alreadyInCart" @click="addToCart">{{
+          $t('home.modify')
+        }}</v-btn>
+        <v-btn style="width: 50%" v-else @click="addToCart">{{ $t('home.add') }}</v-btn>
+        <div style="width: 50%">
+          <v-text-field
+            style="width: 70px"
+            v-model="selectedQuantity"
+            type="number"
+            density="compact"
+            hide-details
+            variant="outlined"
+          ></v-text-field>
+        </div>
+        <v-btn
+          style="width: 80%"
+          class="mt-3"
+          color="indigo-darken-3"
+          variant="flat"
+          @click="redirectToProductDetails"
+          id="product-detail"
+        >
+          {{ $t('home.details') }}</v-btn
+        >
       </div>
     </v-card-actions>
-    <v-btn @click="redirectToProductDetails" id="product-detail"> {{ $t('home.details') }}</v-btn>
   </v-card>
 </template>
 

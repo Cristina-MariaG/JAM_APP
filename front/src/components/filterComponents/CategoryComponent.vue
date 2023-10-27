@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import useFilters from '@/composables/filters'
 import { categoryRepository } from '@/helpers/api'
-import { ref, onMounted, watch, onBeforeMount } from 'vue'
+import type { Category } from '@/types/product.types';
+import { ref, onMounted, watch } from 'vue'
 
-interface Category {
-  id: number
-  category: string
-}
+
 const apiCategories = ref<Category[]>([])
 const selectedCategories = ref([])
 const storeFilters = useFilters()

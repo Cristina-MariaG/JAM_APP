@@ -1,12 +1,12 @@
 import { Axios, type AxiosResponse } from 'axios'
 import { repositoryErrorHandler } from '../error-handler'
 
-export class ContenantTypeRepository {
+export class IngredientRepository {
   constructor(private axios: Axios) {}
 
-  async getContenantTypes() {
+  async getIngredients() {
     try {
-      const { data } = await this.axios.get<any, AxiosResponse<any, any>, any>('/contenant-type/')
+      const { data } = await this.axios.get<any, AxiosResponse<any, any>, any>('/ingredient/')
       return data
     } catch (error) {
       const errorMessage = repositoryErrorHandler(error)

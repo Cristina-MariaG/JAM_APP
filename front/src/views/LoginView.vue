@@ -77,7 +77,7 @@ const handleSubmit = async () => {
       >
     </v-form>
     <div>
-      <p class="text-center">
+      <p class="text-center" id="noAccount">
         {{ $t('login.noAccountYet') }}
         <RouterLink class="routerLink" to="/inscription">{{ $t('login.inscription') }}</RouterLink>
       </p>

@@ -42,7 +42,6 @@ export const useAuthStore = defineStore('auth', {
           token,
           user: { email, role }
         } = await authRepository.login(payload)
-        console.log(role)
         this.$patch({
           role,
           email,
@@ -56,7 +55,6 @@ export const useAuthStore = defineStore('auth', {
     },
     async setRefreshedTokens(token: any) {
       try {
-        console.log(token)
         this.$patch({ accessToken: token.access_token, refreshToken: token.refresh_token })
         return true
       } catch (err) {

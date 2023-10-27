@@ -2,16 +2,26 @@ import logging
 from math import ceil
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
+from rest_framework import status
 from back_app.views.utilities.handle_errors import (
     HandleError,
 )
-from back_app.models import Product
+from back_app.models import (
+    Brand,
+    Category,
+    Flavor,
+    Ingredient,
+    Product,
+    ProductIngredient,
+    StockDisponible,
+    TypeContenant,
+)
 from back_app.views.serializers.product import ProductSerializer, ProductsSerializer
-
+from back_app.views.checkout import verify_validity_decode_token
+from django.conf import settings
 logger = logging.getLogger("jam")
 
-products_per_page = 15
+products_per_page =settings.PRODUCTS_PER_PAGE
 
 
 class ProductsCollection(APIView):
@@ -46,6 +56,70 @@ class ProductsCollection(APIView):
         response["pages_number"] = total_pages
 
         logger.debug("End ProductsCollection get")
+        return Response(response)
+
+    @HandleError.handle_error("ProductsCollection collection post -")
+    def post(self, request, *args, **kwargs):
+        logger.debug("Start ProductsCollection post")
+        response = dict()
+        logger.error(request.data)
+        data = request.data
+
+
+        user_id = verify_validity_decode_token(data["accessToken"])
+
+        if not user_id:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+
+        category_id = data["categoryId"]
+        brand_id = data["brandId"]
+        available_stock = data["availableStock"]
+        contenant_type_id = data["contenantTypeId"]
+        flavor_id = data["flavorId"]
+        name = data["name"]
+        description = data["description"]
+        image = data["image"]
+        price = data["price"]
+        quantity = data["quantity"]
+        promotion = data["promotion"]
+
+        category = Category.objects.get(id=category_id)
+        brand = Brand.objects.get(id=brand_id)
+        contenant_type = TypeContenant.objects.get(id=contenant_type_id)
+        flavor = Flavor.objects.get(id=flavor_id)
+        if available_stock == True:
+            available_stock = "true"
+        else:
+            available_stock = "false"
+
+        stock_disponible = StockDisponible.objects.get(stock_disponible=available_stock)
+
+        product = Product.objects.create(
+            category=category,
+            brand=brand,
+            stock_disponible=stock_disponible,
+            type_contenant=contenant_type,
+            flavor=flavor,
+            name=name,
+            description=description,
+            image=image,
+            price=price,
+            quantity=quantity,
+            promotion=promotion,
+        )
+
+        for ingredient_data in data["ingredients"]:
+            ingredient_id = ingredient_data["ingredientId"]
+            quantity = ingredient_data.get("quantity", None)
+
+            ingredient = Ingredient.objects.get(id=ingredient_id)
+
+            ProductIngredient.objects.create(
+                product=product, ingredient=ingredient, quantity=quantity
+            )
+
+        logger.debug("End ProductsCollection post")
         return Response(response)
 
 

@@ -2,12 +2,20 @@
 import { useCartStore } from '@/stores/cart'
 import HrComponent from '@/components/HrComponent.vue'
 const cartStore = useCartStore()
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const getImageUrl = (imageName: string) => {
   return `../public/uploads/${imageName}`
 }
 const getTotalPrice = (price: number, selectedQuantity: number) => {
   return selectedQuantity * price
+}
+
+const removeFromCart = (id: number) => {
+  if (window.confirm(t('cart.removeQuestion'))) {
+    cartStore.removeFromCart(id)
+  }
 }
 </script>
 
@@ -29,6 +37,9 @@ const getTotalPrice = (price: number, selectedQuantity: number) => {
       <v-col cols="2" class="d-flex align-self-center">
         <p>{{ $t('cart.totalPrice') }}</p>
       </v-col>
+      <v-col cols="1" class="d-flex align-self-center">
+        <v-icon size="large" color="black" icon="mdi-delete"></v-icon>
+      </v-col>
     </v-row>
     <HrComponent />
     <div v-for="product in cartStore.getCart" :key="product.id">
@@ -47,6 +58,14 @@ const getTotalPrice = (price: number, selectedQuantity: number) => {
         </v-col>
         <v-col cols="2" class="d-flex align-self-center">
           <p>{{ getTotalPrice(product.price, product.selectedQuantity) }} €</p>
+        </v-col>
+        <v-col cols="1" class="d-flex align-self-center">
+          <v-icon
+            size="large"
+            color="black"
+            icon="mdi-delete"
+            @click="removeFromCart(product.id)"
+          ></v-icon>
         </v-col>
       </v-row>
       <HrComponent />

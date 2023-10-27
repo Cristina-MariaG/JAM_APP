@@ -14,7 +14,6 @@ export class ProductRepository {
       return data
     } catch (error) {
       const errorMessage = repositoryErrorHandler(error)
-      console.error('Recuperation failed:', errorMessage)
       throw errorMessage
     }
   }
@@ -25,7 +24,7 @@ export class ProductRepository {
       return data
     } catch (error) {
       const errorMessage = repositoryErrorHandler(error)
-      console.error('Recuperation failed:', errorMessage)
+      // console.error('Recuperation failed:', errorMessage)
       throw errorMessage
     }
   }
@@ -36,8 +35,11 @@ export class ProductRepository {
       return data
     } catch (error) {
       const errorMessage = repositoryErrorHandler(error)
-      console.error('Recuperation failed:', errorMessage)
       throw errorMessage
     }
+  }
+
+  async createProduct(productData: any) {
+    return await this.axios.post(`product/`, productData)
   }
 }

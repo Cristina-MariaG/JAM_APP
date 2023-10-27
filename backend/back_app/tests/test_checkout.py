@@ -15,42 +15,6 @@ class TestCheckoutSessionProducts(TestCase):
     def tearDown(self):
         super().tearDown()
 
-    # def test_login_user_create_checkout_and_order(self):
-    #     response_login_user = self.client.post(
-    #         "/login/",
-    #         data={
-    #             "email": "admin@admin.com",
-    #             "password": "adminlovejam",
-    #         },
-    #     )
-
-    #     self.assertEqual(response_login_user.status_code, 200)
-    #     logger.error(response_login_user.data)
-
-    #     checkout_data = {
-    #         "cart": [
-    #             {
-    #                 "id": 1,
-    #                 "name": "cerises",
-    #                 "description": "confiture à la cerises",
-    #                 "image": "cerises.jpeg",
-    #                 "price": "2",
-    #                 "selectedQuantity": 1,
-    #             }
-    #         ],
-    #         "total": 2,
-    #     }
-
-    #     checkout_data["accessToken"] = response_login_user.data["token"]["access_token"]
-
-    #     response_create_checkout_session = self.client.post(
-    #         "/create-checkout-session/",
-    #         data=checkout_data,
-    #         content_type="application/json",
-    #     )
-    #     self.assertEqual(response_create_checkout_session.status_code, 200)
-    #     self.assertEqual(response_create_checkout_session.data["order_id"], 1)
-
     def test_login_user(self):
         response_login_user = self.client.post(
             "/login/",
