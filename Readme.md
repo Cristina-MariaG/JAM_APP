@@ -8,7 +8,7 @@ Create a .env file at the root of project and put inside all the content of the 
 
 These app needs the keys from an account stripe.
 
-We already have some stripe keys, so to test the application we can use those that are already declared.
+We already have some stripe keys, so to test the application we can use those that are already declared (in .env.local)
 
 ### Prerequisites
 
