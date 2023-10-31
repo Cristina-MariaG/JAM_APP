@@ -14,15 +14,20 @@ class TestUser(TestCase):
         super().tearDown()
 
     def test_get_user(self):
+        data = {
+            "email": "admin@admin.com",
+            "password": "adminlovejam",
+        }
         response_post = self.client.post(
             "/login/",
-            data={
-                "email": "admin@admin.com",
-                "password": "adminlovejam",
-            },
+            data=data,
         )
-        logger.error(response_post.data)
         self.assertEqual(response_post.status_code, 200)
+        self.assertIn("token", response_post.data)
+        self.assertIn("refresh_token", response_post.data["token"])
+        self.assertIn("access_token", response_post.data["token"])
+        self.assertEqual(response_post.data["user"]["email"], data["email"])
+        self.assertEqual(response_post.data["user"]["role"], "admin")
 
     def test_inscription_user(self):
         response_post = self.client.post(

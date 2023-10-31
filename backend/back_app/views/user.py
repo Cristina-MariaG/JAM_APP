@@ -1,7 +1,6 @@
 import logging
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.conf import settings
 from rest_framework import status
 from django.contrib.auth.hashers import make_password, check_password
 
@@ -12,7 +11,7 @@ from back_app.views.utilities.handle_errors import (
 from back_app.views.serializers.user import UserSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from django.conf import settings
+
 
 logger = logging.getLogger("jam")
 
@@ -50,17 +49,18 @@ class UserCollection(APIView):
 
 
 class UserInscriptionCollection(APIView):
-    @HandleError.handle_error("User collection creta-")
+    @HandleError.handle_error("User collection create-")
     def post(self, request, *args, **kwargs):
         logger.debug("Start Collection post user")
 
         password = request.data["password"]
         email = request.data["email"]
-        hashed = make_password(password, salt=None, hasher="default")
 
         user = User.objects.filter(email=email)
         if user:
             return Response(status=status.HTTP_403_FORBIDDEN)
+        
+        hashed = make_password(password, salt=None, hasher="default")
 
         role = Role.objects.get(role="classical_user")
 

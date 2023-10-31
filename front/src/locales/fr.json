@@ -8,10 +8,11 @@
     "home": "Accueil",
     "modify": "Modifier",
     "add": "Ajouter",
-    "details": "See details...",
+    "details": "Voir les détails...",
     "quantity": "qty",
-    "logoutUser": "Deconnexion",
-    "dashboard": "Tableau de board"
+    "logoutUser": "Déconnexion",
+    "dashboard": "Tableau de bord",
+    "delete": "Supprimer"
   },
   "login": {
     "login": "Connexion",
@@ -20,22 +21,31 @@
     "fillInput": "Veuillez remplir tous les champs.",
     "noAccountYet": "Pas de compte ?",
     "inscription": "Inscription",
-    "alreadyAccount": "Vous avez deja un compte ?"
+    "alreadyAccount": "Vous avez déjà un compte ?"
   },
   "filters": {
-    "priceBetween": "Price entre ",
-    "category": "Categorie",
-    "contenantType": "Type contenant",
-    "stockDisponible": "Stock disponible",
+    "priceBetween": "Prix entre ",
+    "category": "Catégorie",
+    "contenantType": "Type de contenant",
+    "availableStock": "Stock disponible",
     "brand": "Marque",
-    "onlyAvailableStock": "Only available stock",
-    "orderByPrice": "Order by price",
-    "select": "Selectionner",
-    "searchJam": "Search Jam"
+    "onlyAvailableStock": "Stock disponible uniquement",
+    "orderByPrice": "Trier par prix",
+    "select": "Sélectionner",
+    "searchJam": "Rechercher de la confiture",
+    "quantity": "Quantité",
+    "price": "Prix",
+    "flavor": "Saveur",
+    "ingredients": "Ingrédients",
+    "contenant": "Type de contenant",
+    "onPromotion": "En promotion",
+    "yesPromotion": "oui",
+    "noPromotion": "non",
+    "noDataFound": "Aucune donnée trouvée"
   },
   "cart": {
     "cart": "Panier",
-    "products": "products",
+    "products": "produits",
     "synthese": "Synthèse",
     "total": "Total",
     "notConnected": "Vous devez être connecté pour pouvoir commander",
@@ -46,15 +56,15 @@
     "quantity": "Quantité",
     "totalPrice": "Prix total",
     "empty": "Le panier est vide",
-    "removeQuestion": "Vous etes sur ?"
+    "removeQuestion": "Êtes-vous sûr ?"
   },
   "checkout": {
-    "cancel": "  Annulation du payement en cours.... Vous allez etre redirigé ...",
-    "success": "Votre commande a été enregistré avec success !"
+    "cancel": "Annulation du paiement en cours.... Vous allez être redirigé...",
+    "success": "Votre commande a été enregistrée avec succès !"
   },
   "error": {
-    "badCredentials": "Données de connexion pas bonnes",
-    "genericError": "Une erreur generique est sourvenu..."
+    "badCredentials": "Les informations d'identification ne sont pas valides",
+    "genericError": "Une erreur générique est survenue..."
   },
   "product": {
     "detailsTitle": "Détails du produit",
@@ -63,7 +73,7 @@
     "description": "Description :",
     "price": "Prix :",
     "flavor": "Saveur :",
-    "containerType": "Type contenant",
+    "containerType": "Type de contenant",
     "stockAvailable": "Stock disponible :",
     "yes": "Oui",
     "no": "Non",
@@ -72,5 +82,10 @@
     "yesPromotion": "oui",
     "noPromotion": "non"
   },
-  "noDataFound": "Aucune donnée trouvé"
+  "dashboard": {
+    "save": "Sauvegarder",
+    "onlyAdmin": "Seul l'administrateur peut accéder à cette page...",
+    "add": "Ajouter un produit"
+  },
+  "noDataFound": "Aucune donnée trouvée"
 }

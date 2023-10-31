@@ -19,9 +19,10 @@ from back_app.models import (
 from back_app.views.serializers.product import ProductSerializer, ProductsSerializer
 from back_app.views.checkout import verify_validity_decode_token
 from django.conf import settings
+
 logger = logging.getLogger("jam")
 
-products_per_page =settings.PRODUCTS_PER_PAGE
+products_per_page = settings.PRODUCTS_PER_PAGE
 
 
 class ProductsCollection(APIView):
@@ -65,12 +66,10 @@ class ProductsCollection(APIView):
         logger.error(request.data)
         data = request.data
 
-
         user_id = verify_validity_decode_token(data["accessToken"])
 
         if not user_id:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
-
 
         category_id = data["categoryId"]
         brand_id = data["brandId"]
@@ -141,6 +140,27 @@ class ProductDetailsCollection(APIView):
         serialized_product = ProductSerializer(product)
 
         response["product"] = serialized_product.data
+
+        logger.debug("End ProductDetailsCollection get")
+        return Response(response)
+
+    @HandleError.handle_error("Jam ProductDetailsCollection delete -")
+    def delete(self, request, *args, **kwargs):
+        logger.debug("Start ProductDetailsCollection get")
+        response = dict()
+        product_id_to_delete = kwargs.get("id")
+
+        user_id = verify_validity_decode_token(request.data["token"])
+
+        if not user_id:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        try:
+            product_to_delete = Product.objects.get(id=product_id_to_delete)
+            product_to_delete.delete()
+            response["message"] = "Product successfully deleted."
+        except Product.DoesNotExist:
+            response["message"] = "Product not found for the given ID."
 
         logger.debug("End ProductDetailsCollection get")
         return Response(response)

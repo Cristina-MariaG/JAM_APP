@@ -1,5 +1,5 @@
 {
-  "language": "French",
+  "language": "en",
   "header": {
     "appName": "JAM Shop",
     "language": "Language"
@@ -10,27 +10,38 @@
     "add": "Add",
     "details": "See details...",
     "quantity": "qty",
-    "logoutUser": "Logout"
+    "logoutUser": "Logout",
+    "dashboard": "Dashboard",
+    "delete": "Delete"
   },
   "login": {
     "login": "Login",
     "email": "Email",
     "password": "Password",
     "fillInput": "Please fill in all fields.",
-    "noAccountYet": "No account yet?",
-    "inscription": "Sign up",
+    "noAccountYet": "Don't have an account yet?",
+    "inscription": "Sign Up",
     "alreadyAccount": "Already have an account?"
   },
   "filters": {
-    "priceBetween": "Price between ",
+    "priceBetween": "Price between",
     "category": "Category",
-    "contenantType": "Container type",
-    "stockDisponible": "Stock available",
+    "contenantType": "Container Type",
+    "availableStock": "Available Stock",
     "brand": "Brand",
     "onlyAvailableStock": "Only available stock",
     "orderByPrice": "Order by price",
     "select": "Select",
-    "searchJam": "Search Jam"
+    "searchJam": "Search Jam",
+    "quantity": "Quantity",
+    "price": "Price",
+    "flavor": "Flavor",
+    "ingredients": "Ingredients",
+    "contenant": "Container Type",
+    "onPromotion": "On Promotion",
+    "yesPromotion": "Yes",
+    "noPromotion": "No",
+    "noDataFound": "No data found"
   },
   "cart": {
     "cart": "Cart",
@@ -43,14 +54,16 @@
     "name": "Name",
     "price": "Price",
     "quantity": "Quantity",
-    "totalPrice": "Total Price"
+    "totalPrice": "Total Price",
+    "empty": "The cart is empty",
+    "removeQuestion": "Are you sure?"
   },
   "checkout": {
-    "cancel": "Cancellation of ongoing payment.... You will be redirected...",
-    "success": "Your order has been successfully recorded!"
+    "cancel": "  Payment cancellation in progress... You will be redirected...",
+    "success": "Your order has been successfully registered!"
   },
   "error": {
-    "badCredentials": "Incorrect login data",
+    "badCredentials": "Invalid login credentials",
     "genericError": "A generic error has occurred..."
   },
   "product": {
@@ -61,12 +74,18 @@
     "price": "Price:",
     "flavor": "Flavor:",
     "containerType": "Container Type:",
-    "stockAvailable": "Stock available:",
+    "stockAvailable": "Stock Available:",
     "yes": "Yes",
     "no": "No",
     "ingredients": "Ingredients",
-    "onPromotion": "On promotion:",
-    "yesPromotion": "yes",
-    "noPromotion": "no"
-  }
+    "onPromotion": "On Promotion:",
+    "yesPromotion": "Yes",
+    "noPromotion": "No"
+  },
+  "dashboard": {
+    "save": "Save",
+    "onlyAdmin": "Only the admin can access this page...",
+    "add": "Add a product"
+  },
+  "noDataFound": "No data found"
 }

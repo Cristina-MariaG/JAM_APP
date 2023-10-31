@@ -1,17 +1,15 @@
+from back_app.models import Order
 from back_app.views.serializers.order import LineOrderSerializer, OrderSerializer
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from back_app.views.utilities.handle_errors import (
-    HandleError,
-)
+from back_app.views.utilities.handle_errors import HandleError
+from datetime import datetime
+from datetime import datetime
 from django.conf import settings
-from datetime import datetime
-from datetime import datetime
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+import jwt
 import logging
 import stripe
-import jwt
-from back_app.models import Order
 
 logger = logging.getLogger("jam")
 

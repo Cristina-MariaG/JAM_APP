@@ -1,11 +1,18 @@
+#JAM Shop
+This repository is a starting point for JAM App
+
 ## Getting Started
 Clone this repository.
-Create a .env file in jam_app and put inside all the content of the jam_app/.env.local file.
 
+Create a .env file at the root of project and put inside all the content of the .env.local file.
+
+These app needs the keys from an account stripe.
+
+We already have some stripe keys, so to test the application we can use those that are already declared.
 
 ### Prerequisites
 
-Requirements for the software and other tools to build, test and push
+Requirements for the software :
 
 - [Docker and docker-compose](https://docs.docker.com/get-docker/)
 
@@ -25,11 +32,17 @@ The following urls will be available:
 - back : http://localhost:8213/
 
 
+To connect as admin :
+email : admin@admin.com
+password :adminlovejam
+
 ## Running the tests in dev mode
 Run the tests directly inside the dev containers
 
 Frontend :
-- run in front/ folder:
+- run in front/ folder (cd front):
+docker exec jam-front npm run test 
+
 - npm run test        (to run all the tests)
 - npm run watch        (to run all the tests but keep alive to track changes)
 - npm run coverage     (for coverage report)
@@ -43,9 +56,6 @@ Run all the tests  :
  docker exec -it jam-back bash
 
 
-  python3.7 backend/manage.py test backend/back_app/tests -v 2 
- docker exec -it jam-back bin/bash python3.7 back/back_app/manage.py test back_app/tests -v 2 
-
 -inside the container run :
 python3.10 manage.py test back_app/tests -v 2
 
@@ -56,5 +66,7 @@ Run a single test inside a class test
  - python3.10 manage.py test back_app/tests -k test_refresh_token (file)
  - python3.10 manage.py test back_app/tests -k test_refresh_token_generate (test name inside test_refresh_token)
 
- 
-docker compose exec jam-back python manage.py test
+ or run tests with one line with :
+ docker exec jam-back  python3.10 manage.py test back_app/tests -v 2
+
+

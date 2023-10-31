@@ -18,8 +18,7 @@ const apiContenantType = ref<TypeContenant[]>([])
 const apiFlavorsList = ref<Flavor[]>([])
 const apiIngredientList = ref<Ingredient[]>([])
 const quantity = ref()
-const ingredientsList = ref([])
-const addQuantityValue = ref(false)
+
 import { useAuthStore } from '@/stores/auth'
 import router from '@/router'
 
@@ -44,6 +43,10 @@ const newProduct = reactive({
 })
 
 onBeforeMount(async () => {
+  if (!authStore.accessToken) {
+    router.push({ name: 'login' })
+    return
+  }
   const { categories } = await categoryRepository.getCategories()
   apiCategoriesList.value = categories
 
@@ -80,7 +83,7 @@ const submitForm = async () => {
     newProduct.flavorId !== 'Select' &&
     newProduct.ingredients.length !== 0
   ) {
-    const dataToSend= {...newProduct, accessToken : authStore.accessToken}
+    const dataToSend = { ...newProduct, accessToken: authStore.accessToken }
     try {
       await productRepository.createProduct(dataToSend)
       Swal.fire({
@@ -112,7 +115,10 @@ const submitForm = async () => {
 }
 </script>
 <template>
-  <v-container>
+  <p v-if="!authStore.isAdmin">
+    {{ $t('dashboard.onlyAdmin') }}
+  </p>
+  <v-container v-else>
     <h1 class="text-2xl uppercase pb-2">{{ $t('home.dashboard') }}</h1>
     <v-row>
       <v-col cols="2">
@@ -127,27 +133,27 @@ const submitForm = async () => {
         ></v-select>
       </v-col>
       <v-col cols="2">
-        <p>Marque</p>
+        <p>{{ $t('filters.brand') }}</p>
         <v-select
           v-if="apiBrandList.length"
           v-model="newProduct.brandId"
           :items="apiBrandList"
           item-title="brand"
           item-value="id"
-          label="Marque"
+          :label="$t('filters.brand')"
           single-line
         ></v-select>
       </v-col>
       <v-col cols="2">
         <v-switch
           v-model="newProduct.availableStock"
-          label="Only Available Stock"
+          :label="$t('filters.availableStock')"
           hide-details
           inset
         ></v-switch>
       </v-col>
       <v-col cols="2">
-        <p>Type contenant</p>
+        <p>{{ $t('filters.contenant') }}</p>
 
         <v-select
           v-if="apiContenantType.length"
@@ -160,7 +166,7 @@ const submitForm = async () => {
         ></v-select>
       </v-col>
       <v-col cols="2">
-        <p>Flavor</p>
+        <p>{{ $t('filters.flavor') }}</p>
         <v-select
           v-if="apiFlavorsList.length"
           v-model="newProduct.flavorId"
@@ -175,9 +181,9 @@ const submitForm = async () => {
 
     <v-row>
       <v-col cols="6">
-        <h3>Ingredients</h3>
+        <h3>{{ $t('filters.ingredients') }}</h3>
         <v-text-field
-          label="quantité de l'ingredient contenu"
+          :label="$t('filters.quantity')"
           hide-details="auto"
           type="number"
           v-model="quantity"
@@ -187,7 +193,7 @@ const submitForm = async () => {
             <p>{{ ingredient.ingredient }}</p>
           </v-col>
           <v-col cols="4">
-            <v-btn @click="addQuantity(ingredient.id)">Add Quantity</v-btn>
+            <v-btn @click="addQuantity(ingredient.id)">{{ $t('dashboard.add') }}</v-btn>
           </v-col>
         </v-row>
       </v-col>
@@ -199,7 +205,7 @@ const submitForm = async () => {
           <v-text-field v-model="newProduct.price" label="Price"></v-text-field>
           <v-text-field
             v-model.number="newProduct.quantity"
-            label="Quantity"
+            :label="$t('filters.quantity')"
             type="number"
           ></v-text-field>
           <v-text-field
@@ -208,7 +214,9 @@ const submitForm = async () => {
             required
             type="number"
           ></v-text-field>
-          <v-btn color="indigo-darken-3" variant="flat" type="submit">Save</v-btn>
+          <v-btn color="indigo-darken-3" variant="flat" type="submit">{{
+            $t('dashboard.save')
+          }}</v-btn>
         </v-form>
       </v-col>
     </v-row>
@@ -231,143 +239,3 @@ input {
   margin-bottom: 12px;
 }
 </style>
-
-<!-- <template>
-  <v-container>
-    <h1 class="text-2xl uppercase pb-2">{{ $t('home.dashboard') }}</h1>
-
-    <div class="d-flex">
-      <v-row>
-        <v-col cols="2">
-          <div>
-            <p>Category</p>
-            <v-select
-              v-if="apiCategoriesList.length"
-              v-model="newProduct.categoryId"
-              :items="apiCategoriesList"
-              item-title="category"
-              item-value="id"
-              label="Select"
-              single-line
-            ></v-select>
-          </div>
-        </v-col>
-        <v-col cols="2">
-          <div>
-            <p>Marque</p>
-            <v-select
-              v-if="apiBrandList.length"
-              v-model="newProduct.brandId"
-              :items="apiBrandList"
-              item-title="brand"
-              item-value="id"
-              label="Select"
-              single-line
-            ></v-select>
-          </div>
-        </v-col>
-        <v-col cols="2">
-          <div>
-            <p>Stock dispo</p>
-            <v-switch
-              v-model="newProduct.availableStock"
-              hide-details
-              inset
-              :label="$t('filters.onlyAvailableStock')"
-            ></v-switch>
-          </div>
-        </v-col>
-        <v-col cols="2">
-          <div>
-            <p>Type Contenant</p>
-            <v-select
-              v-if="apiContenantType.length"
-              v-model="newProduct.contenantTypeId"
-              :items="apiContenantType"
-              item-title="type_contenant"
-              item-value="id"
-              label="Select"
-              single-line
-            ></v-select>
-          </div>
-        </v-col>
-        <v-col cols="2">
-          <div>
-            <p>Flavor</p>
-            <v-select
-              v-if="apiFlavorsList.length"
-              v-model="newProduct.flavorId"
-              :items="apiFlavorsList"
-              item-title="flavor"
-              item-value="id"
-              label="Select"
-              single-line
-            ></v-select>
-          </div>
-        </v-col>
-      </v-row>
-    </div>
-    <diV>
-      <form @submit.prevent="submitForm">
-        <v-row>
-          <v-col cols="6">
-            <p>Ingredients</p>
-            <div v-if="addQuantityValue">
-              <v-responsive class="mx-auto" max-width="344">
-                <v-text-field
-                  label="quantité contenu"
-                  hide-details="auto"
-                  type="number"
-                  v-model="quantity"
-                ></v-text-field>
-              </v-responsive>
-            </div>
-            <div class="" v-for="ingredient in apiIngredientList" :key="ingredient.id">
-              <p>{{ ingredient.ingredient }}</p>
-              <div>
-                <v-btn @click="addQuantity(ingredient.id)">Add quantity selected </v-btn>
-                <v-btn @click="addQuantityValue = !addQuantityValue">show quantity </v-btn>
-              </div>
-            </div>
-          </v-col>
-          <v-col cols="4">
-            <label for="name">Name:</label>
-            <input type="text" id="name" v-model="newProduct.name" required />
-            <br /><br />
-
-            <label for="description">Description:</label>
-            <input type="text" id="description" v-model="newProduct.description" />
-            <br /><br />
-
-            <label for="image">Image URL:</label>
-            <input type="text" id="image" v-model="newProduct.image" />
-            <br /><br />
-
-            <label for="price">Price:</label>
-            <input type="text" id="price" v-model="newProduct.price" />
-            <br /><br />
-
-            <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" v-model.number="newProduct.quantity" />
-            <br /><br />
-
-            <label for="promotion">Promotion:</label>
-            <input type="number" id="promotion" v-model.number="newProduct.promotion" required />
-            <br /><br />
-
-            <v-btn type="submit">Save</v-btn>
-          </v-col>
-        </v-row>
-      </form>
-    </diV>
-  </v-container>
-</template>
-
-<style>
-input {
-  background-color: #fafafa;
-  border: 0;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
-  transition: 0.3s box-shadow;
-}
-</style> -->

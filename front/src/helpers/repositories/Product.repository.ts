@@ -28,6 +28,11 @@ export class ProductRepository {
       throw errorMessage
     }
   }
+  async deleteProduct(dataToSend: any) {
+    return await this.axios.delete<{ product: Product }>(`/product/${dataToSend.id}`, {
+      data: dataToSend
+    })
+  }
 
   async getMinMAx() {
     try {

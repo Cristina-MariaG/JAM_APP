@@ -404,7 +404,7 @@
         "fields": {
             "product": 1,
             "ingredient": 1,
-            "quantity": 2.5
+            "quantity": 55
         }
     },
     {
@@ -412,17 +412,17 @@
         "pk": 2,
         "fields": {
             "product": 1,
-            "ingredient": 2,
-            "quantity": 1.0
+            "ingredient": 5,
+            "quantity": 55
         }
     },
     {
         "model": "back_app.productingredient",
         "pk": 3,
         "fields": {
-            "product": 2,
-            "ingredient": 3,
-            "quantity": 2.5
+            "product": 1,
+            "ingredient": 6,
+            "quantity": 55
         }
     },
     {
@@ -430,94 +430,447 @@
         "pk": 4,
         "fields": {
             "product": 2,
-            "ingredient": 2,
-            "quantity": 1.0
+            "ingredient": 1,
+            "quantity": 55
         }
     },
     {
         "model": "back_app.productingredient",
         "pk": 5,
         "fields": {
-            "product": 3,
-            "ingredient": 2,
-            "quantity": 1.0
+            "product": 2,
+            "ingredient": 8,
+            "quantity": 55
         }
     },
     {
         "model": "back_app.productingredient",
         "pk": 6,
         "fields": {
+            "product": 2,
+            "ingredient": 4,
+            "quantity": 55
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 7,
+        "fields": {
+            "product": 3,
+            "ingredient": 1,
+            "quantity": 55
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 8,
+        "fields": {
+            "product": 3,
+            "ingredient": 8,
+            "quantity": 55
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 9,
+        "fields": {
+            "product": 3,
+            "ingredient": 4,
+            "quantity": 55
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 10,
+        "fields": {
+            "product": 3,
+            "ingredient": 1,
+            "quantity": 55
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 11,
+        "fields": {
+            "product": 3,
+            "ingredient": 3,
+            "quantity": 55
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 12,
+        "fields": {
             "product": 4,
-            "ingredient": 2,
-            "quantity": 1.0
+            "ingredient": 1,
+            "quantity": 50
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 13,
+        "fields": {
+            "product": 4,
+            "ingredient": 3,
+            "quantity": 150
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 14,
+        "fields": {
+            "product": 4,
+            "ingredient": 6,
+            "quantity": 150
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 15,
+        "fields": {
+            "product": 5,
+            "ingredient": 1,
+            "quantity": 50
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 16,
+        "fields": {
+            "product": 5,
+            "ingredient": 3,
+            "quantity": 150
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 17,
+        "fields": {
+            "product": 5,
+            "ingredient": 6,
+            "quantity": 150
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 18,
+        "fields": {
+            "product": 6,
+            "ingredient": 1,
+            "quantity": 50
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 19,
+        "fields": {
+            "product": 6,
+            "ingredient": 3,
+            "quantity": 150
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 20,
+        "fields": {
+            "product": 6,
+            "ingredient": 6,
+            "quantity": 150
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 21,
+        "fields": {
+            "product": 7,
+            "ingredient": 1,
+            "quantity": 50
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 22,
+        "fields": {
+            "product": 7,
+            "ingredient": 3,
+            "quantity": 150
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 23,
+        "fields": {
+            "product": 7,
+            "ingredient": 6,
+            "quantity": 150
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 24,
+        "fields": {
+            "product": 8,
+            "ingredient": 1,
+            "quantity": 50
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 25,
+        "fields": {
+            "product": 8,
+            "ingredient": 3,
+            "quantity": 150
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 26,
+        "fields": {
+            "product": 8,
+            "ingredient": 6,
+            "quantity": 150
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 27,
+        "fields": {
+            "product": 9,
+            "ingredient": 1,
+            "quantity": 50
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 28,
+        "fields": {
+            "product": 9,
+            "ingredient": 3,
+            "quantity": 150
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 29,
+        "fields": {
+            "product": 9,
+            "ingredient": 6,
+            "quantity": 150
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 30,
+        "fields": {
+            "product": 10,
+            "ingredient": 1,
+            "quantity": 50
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 31,
+        "fields": {
+            "product": 10,
+            "ingredient": 3,
+            "quantity": 150
+        }
+    },
+    {
+        "model": "back_app.productingredient",
+        "pk": 32,
+        "fields": {
+            "product": 10,
+            "ingredient": 6,
+            "quantity": 150
         }
     },
     {
         "model": "back_app.product",
         "pk": 1,
         "fields": {
-            "name": "cerises",
-            "description": "confiture à la cerises",
-            "image": "cerises.jpeg",
-            "price": "2",
-            "flavor": 1,
-            "type_contenant": 1,
+            "name": "Fraise",
+            "description": "jam de fraises",
+            "image": "fraise.jpeg",
+            "price": "5",
+            "promotion": 0,
+            "quantity": 250,
             "brand": 1,
-            "promotion": 1,
-            "stock_disponible": 1,
-            "category": 1,
-            "quantity": 150.0
+            "category": 2,
+            "flavor": 3,
+            "stock_disponible": 2,
+            "type_contenant": 1
         }
     },
     {
         "model": "back_app.product",
         "pk": 2,
         "fields": {
-            "name": "figue",
-            "description": "confiture à la figue",
-            "image": "figue.jpeg",
-            "price": "3",
-            "flavor": 2,
-            "type_contenant": 2,
-            "brand": 2,
-            "promotion": 0,
+            "name": "Cerises",
+            "description": "cerises jam",
+            "image": "cerises.jpeg",
+            "price": "5",
+            "promotion": 1,
+            "quantity": 500,
+            "brand": 1,
+            "category": 3,
+            "flavor": 5,
             "stock_disponible": 1,
-            "category": 2,
-            "quantity": 150.0
+            "type_contenant": 1
         }
     },
     {
         "model": "back_app.product",
         "pk": 3,
         "fields": {
-            "name": "banane",
-            "description": "confiture à la banane",
+            "name": "Figue",
+            "description": "figue jam",
             "image": "figue.jpeg",
-            "price": "7",
-            "flavor": 2,
-            "type_contenant": 2,
+            "price": "5.50",
+            "promotion": 1,
+            "quantity": 450,
             "brand": 2,
-            "promotion": 0,
+            "category": 1,
+            "flavor": 4,
             "stock_disponible": 1,
-            "category": 2,
-            "quantity": 150.0
+            "type_contenant": 3
         }
     },
     {
         "model": "back_app.product",
         "pk": 4,
         "fields": {
-            "name": "abricot",
-            "description": "confiture à abricot",
-            "image": "figue.jpeg",
-            "price": "5",
-            "flavor": 2,
-            "type_contenant": 2,
-            "brand": 2,
+            "name": "Fraise",
+            "description": "jam fraise",
+            "image": "fraise.jpeg",
+            "price": "4.50",
             "promotion": 0,
-            "stock_disponible": 1,
+            "quantity": 350,
+            "brand": 1,
             "category": 2,
-            "quantity": 150.0
+            "flavor": 1,
+            "stock_disponible": 1,
+            "type_contenant": 2
+        }
+    },
+    {
+        "model": "back_app.product",
+        "pk": 5,
+        "fields": {
+            "name": "Framboise",
+            "description": "jam fraise",
+            "image": "framboise.jpeg",
+            "price": "4.80",
+            "promotion": 0,
+            "quantity": 350,
+            "brand": 2,
+            "category": 1,
+            "flavor": 5,
+            "stock_disponible": 1,
+            "type_contenant": 2
+        }
+    },
+    {
+        "model": "back_app.product",
+        "pk": 6,
+        "fields": {
+            "name": "Gelee-coings.jpeg",
+            "description": "jam fraise",
+            "image": "gelee-coings.jpeg",
+            "price": "5.80",
+            "promotion": 0,
+            "quantity": 350,
+            "brand": 2,
+            "category": 2,
+            "flavor": 5,
+            "stock_disponible": 1,
+            "type_contenant": 1
+        }
+    },
+    {
+        "model": "back_app.product",
+        "pk": 7,
+        "fields": {
+            "name": "Prune.jpeg",
+            "description": "jam prune",
+            "image": "prune.jpeg",
+            "price": "3.80",
+            "promotion": 0,
+            "quantity": 400,
+            "brand": 2,
+            "category": 2,
+            "flavor": 5,
+            "stock_disponible": 1,
+            "type_contenant": 1
+        }
+    },
+    {
+        "model": "back_app.product",
+        "pk": 8,
+        "fields": {
+            "name": "Myrtille",
+            "description": "jam Myrtille",
+            "image": "myrtille.jpeg",
+            "price": "4.20",
+            "promotion": 0,
+            "quantity": 420,
+            "brand": 1,
+            "category": 3,
+            "flavor": 5,
+            "stock_disponible": 1,
+            "type_contenant": 3
+        }
+    },
+    {
+        "model": "back_app.product",
+        "pk": 9,
+        "fields": {
+            "name": "Intense-myrtille",
+            "description": "jam Myrtille intense",
+            "image": "intense-myrtille.jpeg",
+            "price": "4.90",
+            "promotion": 0,
+            "quantity": 420,
+            "brand": 1,
+            "category": 3,
+            "flavor": 5,
+            "stock_disponible": 1,
+            "type_contenant": 1
+        }
+    },
+    {
+        "model": "back_app.product",
+        "pk": 10,
+        "fields": {
+            "name": "Intense-fraise",
+            "description": "jam fraise intense",
+            "image": "intense-fraise.jpeg",
+            "price": "4.90",
+            "promotion": 0,
+            "quantity": 420,
+            "brand": 2,
+            "category": 2,
+            "flavor": 5,
+            "stock_disponible": 1,
+            "type_contenant": 1
+        }
+    },
+    {
+        "model": "back_app.product",
+        "pk": 11,
+        "fields": {
+            "name": "Intense-abricot",
+            "description": "jam abricot intense",
+            "image": "intense-abricot.jpeg",
+            "price": "4.30",
+            "promotion": 1,
+            "quantity": 400,
+            "brand": 2,
+            "category": 2,
+            "flavor": 5,
+            "stock_disponible": 1,
+            "type_contenant": 1
         }
     },
     {

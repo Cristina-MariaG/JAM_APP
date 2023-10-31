@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import { ref, watch } from 'vue'
+import { onBeforeMount, onMounted, ref, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { computed } from 'vue'
 import { useCartStore } from '@/stores/cart'
@@ -8,8 +8,10 @@ import router from '@/router'
 import { useRoute } from 'vue-router'
 import useFilters from '@/composables/filters'
 import HeaderActions from './HeaderActions.vue'
-const route = useRoute()
+import { usei18nStore } from '@/stores/i18n'
+import { useI18n } from 'vue-i18n'
 
+const route = useRoute()
 const searchedValue = ref<string>('')
 
 watch(
@@ -17,13 +19,21 @@ watch(
   () => {
     if (route.name === 'search' && typeof route.params.searched === 'string') {
       searchedValue.value = route.params.searched
+    } else {
+      searchedValue.value = ''
     }
   }
 )
 
+onBeforeMount(() => {
+  let locale = usei18nStore().getLang
+  if (locale !== useI18n().locale.value) {
+    useI18n().locale.value = locale
+  }
+})
+
 const authStore = useAuthStore()
 const cartStore = useCartStore()
-
 const userEmail = computed(() => authStore.getEmail)
 const userAuthenticated = computed(() => authStore.isAuth)
 
@@ -37,8 +47,10 @@ const searchJam = () => {
   }
 }
 
-const languageOptions = ref<string[]>(['fr', 'en'])
-
+const languageOptions = ref<string[]>(useI18n().availableLocales)
+const onLanguageChange = (lang: string) => {
+  usei18nStore().setLang(lang)
+}
 const navigateToCart = () => {
   router.push({ name: 'cart' })
 }
@@ -64,7 +76,12 @@ const navigateToCart = () => {
   <v-spacer></v-spacer>
 
   <div class="mt-2 mr-5">
-    <v-select v-model="$i18n.locale" :items="languageOptions" variant="underlined"></v-select>
+    <v-select
+      v-model="$i18n.locale"
+      @update:modelValue="onLanguageChange"
+      :items="languageOptions"
+      variant="underlined"
+    ></v-select>
   </div>
   <v-btn @click="navigateToCart">
     <v-icon size="large" color="white" icon="mdi-cart-outline"

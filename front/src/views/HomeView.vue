@@ -24,7 +24,6 @@ const getData = async () => {
 
   products.value = fetchedProducts
   pagesNumber.value = pages_number
-  console.log(pagesNumber)
 }
 
 watch(page, async (val) => {

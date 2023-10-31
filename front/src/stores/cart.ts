@@ -70,6 +70,7 @@ export const useCartStore = defineStore('cart', {
       if (index !== -1) {
         this.cart.splice(index, 1)
       }
+      this.cartProductsNumber = this.cart.length
     },
 
     resetStore() {

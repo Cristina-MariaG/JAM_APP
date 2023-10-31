@@ -1,0 +1,5 @@
+import { flushPromises, mount } from '@vue/test-utils'
+import { expect, describe, vi, it } from 'vitest'
+import { categoryRepository } from '@/helpers/api'
+import PriceLimits from '@/components/filterComponents/PriceLimitsComponent.vue'
+import useFilters from '@/composables/filters'

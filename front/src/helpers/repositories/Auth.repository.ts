@@ -11,7 +11,6 @@ export class AuthRepository {
       return data
     } catch (error) {
       const errorMessage = repositoryErrorHandler(error)
-      console.error('Login failed:', errorMessage)
       throw errorMessage
     }
   }

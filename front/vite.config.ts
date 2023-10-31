@@ -11,10 +11,10 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
-    vuetify()
-    // VueI18nPlugin({
-    //   include: resolve(dirname(fileURLToPath(import.meta.url)), './src/locales/**') // provide a path to the folder where you'll store translation data (see below)
-    // })
+    vuetify(),
+    VueI18nPlugin({
+      include: resolve(dirname(fileURLToPath(import.meta.url)), './src/locales/**') // provide a path to the folder where you'll store translation data (see below)
+    })
   ],
   optimizeDeps: {
     exclude: ['vuetify'] // to avoid errors during cypress integration tests

@@ -8,7 +8,7 @@ const cartStore = useCartStore()
 <template>
   <div>
     <div v-if="cartStore.productsNumber === 0">
-      <h1 class="text-center">{{ $t('cart.empty') }}</h1>
+      <h1 class="text-center mt-5 pt-5">{{ $t('cart.empty') }}</h1>
     </div>
     <div v-else style="width: 80%" class="mx-auto mt-5">
       <CardJamCartComponent />

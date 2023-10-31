@@ -83,7 +83,6 @@ class TestCheckoutSessionProducts(TestCase):
         url = f"/delete-order/{order_id}/"
 
         response_delete_order = self.client.delete(url)
-        logger.error(response_delete_order)
 
         self.assertEqual(response_delete_order.status_code, 406)
 
@@ -92,6 +91,5 @@ class TestCheckoutSessionProducts(TestCase):
         url = f"/delete-order/{order_id}/"
 
         response_delete_order = self.client.delete(url)
-        logger.error(response_delete_order)
 
         self.assertEqual(response_delete_order.status_code, 200)

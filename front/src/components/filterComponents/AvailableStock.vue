@@ -12,7 +12,7 @@ watch(availableStock, (newVal) => {
 
 <template>
   <div class="mb-5">
-    <p class="filtersText">{{ $t('filters.stockDisponible') }}</p>
+    <p class="filtersText">{{ $t('filters.availableStock') }}</p>
     <v-switch
       v-model="availableStock"
       hide-details

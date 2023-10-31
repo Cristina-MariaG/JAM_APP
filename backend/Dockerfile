@@ -19,8 +19,6 @@ COPY requirements.txt /tmp/requirements.txt
 
 RUN python3.10 -m pip install --upgrade pip && python3.10 -m pip install -r /tmp/requirements.txt
 
-# Clean up
-# RUN rm get-pip.py
 
 # Set the default command to bash
 CMD ["bash"]

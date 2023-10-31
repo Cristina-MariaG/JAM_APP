@@ -16,7 +16,7 @@ watch(selectedOrder, (val) => {
 
 <template>
   <div>
-    <p id="title">{{ $t('filters.orderByPrice') }}</p>
+    <p id="title" class="filtersText">{{ $t('filters.orderByPrice') }}</p>
     <v-combobox
       v-model="selectedOrder"
       :items="orderedType"
