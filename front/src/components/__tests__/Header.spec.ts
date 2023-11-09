@@ -1,9 +1,7 @@
 import { flushPromises, mount } from '@vue/test-utils'
 import { createTestingPinia } from '@pinia/testing'
-import { describe, test, vi, beforeEach, afterEach } from 'vitest'
-import Header from '../Header.vue'
-import { createLocalVue } from '@vue/test-utils'
-
+import { describe, test, vi, beforeEach, afterEach, expect } from 'vitest'
+import Header from '../common/Header.vue'
 let mockCreated = vi.fn()
 let wrapper
 
@@ -14,7 +12,6 @@ const doMount = (params = {}, createdIsMocked = true) => {
 
   wrapper = mount(Header, {
     ...params,
-    localVue,
     global: {
       plugins: [
         createTestingPinia({
@@ -33,8 +30,8 @@ const doMount = (params = {}, createdIsMocked = true) => {
 
 describe('Methods', () => {
   test('getProjects (success) - send get request & then update projects with response data & finally hide loader', async () => {
-    doMount()
-
+    wrapper =doMount()
+   expect(wrapper.exists()).toBe(true)
     console.log(wrapper.html())
   })
 })

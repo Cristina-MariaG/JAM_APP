@@ -15,9 +15,6 @@ RUN npm install
 # Copy project files and folders into the working directory (e.g., the 'app' folder)
 COPY . .
 
-# Build the app for production by minifying it
-RUN npm run build
-
 # Expose port 8000
 EXPOSE 8000
 
