@@ -1,6 +1,42 @@
 #JAM Shop
 This repository is a starting point for JAM App
 
+Full-Stack Web Application
+
+This project is a complete web application for selling jams, developed as part of the Expert in Computer Science and Information Systems training program at 3W Academy.
+
+The main objective of this project was to transform an existing application into a modern, API-based architecture and to design a dedicated front-end to consume it, with a strong focus on code quality, testing, security, and maintainability.
+
+🔧 Tech Stack
+
+Backend: Django REST Framework (secure REST API)
+
+Frontend: Vue.js 3 + TypeScript
+
+Database: MySQL
+
+Testing: Unit, integration, and end-to-end tests (backend & frontend)
+
+Infrastructure: Docker & Docker Compose
+
+Architecture: Clear separation between Frontend / API / Database
+
+🚀 Key Features
+
+Secure authentication
+
+Advanced faceted search filters
+
+Online payments with Stripe
+
+Versioned and fully tested API
+
+Full application containerization
+
+Detailed technical documentation
+
+This project demonstrates my ability to design, develop, test, and deploy a full-stack web application from start to finish, with an emphasis on clean architecture, code quality, and scalability.
+
 ## Getting Started
 Clone this repository.
 
@@ -68,5 +104,6 @@ Run a single test inside a class test
 
  or run tests with one line with :
  docker exec jam-back  python3.10 manage.py test back_app/tests -v 2
+
 
 
