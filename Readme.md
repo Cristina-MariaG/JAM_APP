@@ -3,9 +3,9 @@ This repository is a starting point for JAM App
 
 Full-Stack Web Application
 
-This project is a complete web application for selling jams, developed as part of the Expert in Computer Science and Information Systems training program at 3W Academy.
+This project is a complete web application for selling jams.
 
-The main objective of this project was to transform an existing application into a modern, API-based architecture and to design a dedicated front-end to consume it, with a strong focus on code quality, testing, security, and maintainability.
+This project is an API-based architecture with a strong focus on code quality, testing, security, and maintainability.
 
 🔧 Tech Stack
 
@@ -104,6 +104,7 @@ Run a single test inside a class test
 
  or run tests with one line with :
  docker exec jam-back  python3.10 manage.py test back_app/tests -v 2
+
 
 
 
