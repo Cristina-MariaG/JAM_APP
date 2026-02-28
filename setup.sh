@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!volu/usr/bin/env bash
 
 # Volumes
 echo "Creating dedicated volumes"

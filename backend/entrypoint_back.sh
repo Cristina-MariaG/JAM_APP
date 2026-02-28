@@ -27,7 +27,7 @@ python3.10 /back/manage.py loaddata initial-data.json
 
 # python3.10 manage.py dumpdata --format yaml > back_app/fixtures/initial-data.yaml
 # python3.10 manage.py dumpdata --format json > back_app/fixtures/initial-data.json
-#  a garder en tête que le fait d'ajouter initial-data ne va pas impacter les autres utilisateurs existents deja! seulement si on cange dans les fixtures un utilisateur deja existent, il est change dans l bdd. ça veut dire que djsngo garde aussi une trace des utlisateurs crees par des fixtures
+#  a garder en tête que le fait d'ajouter initial-data ne va pas impacter les autres utilisateurs existents deja! seulement si on change dans les fixtures un utilisateur deja existent, il est change dans la bdd. ça veut dire que django garde aussi une trace des utlisateurs crees par des fixtures
 
 
 # python3.10 /back/manage.py loaddata initial-data.yaml
