@@ -13,6 +13,7 @@
 !.vscode/extensions.json
 .docx
 .env
+.env.local
 # System Files
 .DS_Store
 Thumbs.db
