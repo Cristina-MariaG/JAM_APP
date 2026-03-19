@@ -1,5 +1,3 @@
-version: "3.9"
-
 x-logging:
   &default-logging
     options:
@@ -18,6 +16,7 @@ services:
     container_name: jam-front
     volumes:
       - ./${HOST_DIR_FRONT}/:/front/
+      - /front/node_modules 
     env_file: .env
     tty: true
     networks:
@@ -47,12 +46,13 @@ services:
       BACK_DJANGO_SUPER_USER_PWD: ${DJANGO_SUPER_USER_PWD}
     command: "/back/entrypoint_back.sh"
     depends_on:
-       - jam_sqldb
+      jam_sqldb:
+        condition: service_healthy
 
   ### DATABASE ###
   jam_sqldb:
     container_name: jam_sql
-    image: mysql
+    image: mysql:8.0
     restart: unless-stopped
     env_file: .env
     environment:
@@ -69,6 +69,12 @@ services:
       jam_network:
         aliases:
           - ${DB_MOTEUR_HOST}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
 
 
 volumes:
